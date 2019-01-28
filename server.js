@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const passport = require("passport");
+const users = require("./routes/api/users")
 // mongoose.plugin(schema => { schema.options.usePushEach = true });
 // const routes = require("./routes");
 // const path = require("path");
@@ -29,9 +31,14 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-// Add routes, both API and view
 
-// app.use(routes);
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+// Routes
+app.use("/api/users", users);
+
 
 // app.get('/', (req, res) => {
 // 	res.send('Hello');

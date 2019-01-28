@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const config = require("../../config/index");
 const bcrypt = require("bcryptjs");
-const jsonwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const keys = require("../../config/secret");
 
 //  validation
-const validateRegistrationInput = require("../../validation/register");
+const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
 // User model
@@ -58,27 +59,13 @@ router.post("/login", (req, res) => {
       return res.status(400).json(errors);
     }
   const email = req.body.email;
-    const password = req.body.password;
+  const password = req.body.password;
   // Find user by email
     User.findOne({ email }).then(user => {
       // Check if user exists
       if (!user) {
         return res.status(404).json({ emailnotfound: "Email not found" });
-        router.post("/login", (req, res) => {
-            // Form validation
-          const { errors, isValid } = validateLoginInput(req.body);
-          // Check validation
-            if (!isValid) {
-              return res.status(400).json(errors);
-            }
-          const email = req.body.email;
-            const password = req.body.password;
-          // Find user by email
-            User.findOne({ email }).then(user => {
-              // Check if user exists
-              if (!user) {
-                return res.status(404).json({ emailnotfound: "Email not found" });
-            }
+      }  
             // Check password
                 bcrypt.compare(password, user.password).then(isMatch => {
                   if (isMatch) {
@@ -106,12 +93,10 @@ router.post("/login", (req, res) => {
                     return res
                       .status(400)
                       .json({ passwordincorrect: "Password incorrect" });
-                    }
-                })
+                }
                   });
                 });
-            }
               });
-            })
+          
 
-              module.exports = router;
+module.exports = router;
