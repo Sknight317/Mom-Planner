@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Navbarlogin from "../layout/NavbarLogin";
-import Slider from "../slider/index";
-class Dashboard extends Component {
+// import Slider from "../slider/index";
+class Connect extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
@@ -20,9 +20,9 @@ return (
           <div className="col l12 center-align">
           
             <h4>
-              <b>Hey,</b> {user.name.split(" ")[0]}
+             
               <p className="flow-text grey-text text-darken-1">
-                Welcome to Mom Planner!
+                Convenient Place to store your important information.
               </p>
             </h4>
             <button
@@ -44,15 +44,13 @@ return (
        
           
       </div>
-      <div className="container valign-wrapper">
-       <Slider />
-      </div>
+      
       </div>
       
     );
   }
 }
-Dashboard.propTypes = {
+Connect.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -62,4 +60,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { logoutUser }
-)(Dashboard);
+)(Connect);
