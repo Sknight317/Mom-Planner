@@ -3,18 +3,42 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Navbarlogin from "../layout/NavbarLogin";
-// import Slider from "../slider/index";
+import { List, ListItem } from "../ShoppingList/index";
+import Modal from "../Modal";
+import ShowmodalBtn from "../ShowmodalBtn";
+
 class Calendar extends Component {
+      state = {
+      notes: [],
+      text: "",
+      show: false};
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
+    
   };
+
+showModal = () => {
+    this.setState({ show: true });
+};
+
+hideModal = () => {
+    this.setState({ show: false });
+};
+
+addNewNote = event => {
+event.preventdefault();
+alert("add button clicked")
+}
+
 render() {
     const { user } = this.props.auth;
 return (
-  <div>
+  <div className="container">
   <Navbarlogin />
-      <div className="container valign-wrapper">
+  <div className="container valign-wrapper">  
+ 
+      
       
         <div className="row">
           <div className="col l12 center-align">
@@ -41,12 +65,36 @@ return (
           
           </div>
             
+          return (
+      <div className="container valign-wrapper">
+      <Modal show={this.state.show} handleClose={this.hideModal}>
+      <p>Modal</p>
+      <p>Data</p>
+      </Modal>
+        <h3>My Notes</h3>
+      {this.state.notes.length ? (
+       <List>
+         {this.state.notes.map(note => {
+      return (
+      <ListItem key={note.id}>
+        <ShowmodalBtn onClick={this.showModal}>
+        Add a Note
+        </ShowmodalBtn>
+        </ListItem>
+      
        
+      );
+     })} 
+     </List>
+     ) : (
+       <h3> No Notes to Display</h3>
+     )}
+  </div>
+      );
           
       </div>
       
       </div>
-      
     );
   }
 }

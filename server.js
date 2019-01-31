@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const users = require("./routes/api/users")
+const users = require("./routes/api/users");
+const todoRoutes = require("./routes/api/todo")
 // mongoose.plugin(schema => { schema.options.usePushEach = true });
 // const routes = require("./routes");
 // const path = require("path");
@@ -38,7 +39,12 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
+app.use("/api/", todoRoutes);
 
+// catch 404
+app.use((req, res, next) => {
+  res.status(404).send('<h2 align=center>Page Not Found!</h2>');
+});
 
 // app.get('/', (req, res) => {
 // 	res.send('Hello');
