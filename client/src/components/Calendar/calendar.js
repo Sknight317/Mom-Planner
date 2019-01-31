@@ -6,12 +6,15 @@ import Navbarlogin from "../layout/NavbarLogin";
 import { List, ListItem } from "../ShoppingList/index";
 import Modal from "../Modal";
 import ShowmodalBtn from "../ShowmodalBtn";
+import M from 'materialize-css';  
 
 class Calendar extends Component {
       state = {
       notes: [],
       text: "",
-      show: false};
+      show: false,
+      showMenu: false
+    };
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
@@ -31,6 +34,10 @@ event.preventdefault();
 alert("add button clicked")
 }
 
+componentDidMount() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+}
 render() {
     const { user } = this.props.auth;
 return (
@@ -65,21 +72,33 @@ return (
           
           </div>
             
-          return (
-      <div className="container valign-wrapper">
+          </div> 
+      
       <Modal show={this.state.show} handleClose={this.hideModal}>
-      <p>Modal</p>
-      <p>Data</p>
+      <div class="input-field col s12">
+      
+    <select>
+      <option value="" disabled selected>Choose your option</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+    <label>Materialize Select</label>
+  </div>
       </Modal>
+      <div className="row">
+          <div className="col s12 center-align">
         <h3>My Notes</h3>
+        </div>
+        </div>
+        <div className="row">
+          <div className="col s12 center-align"> 
       {this.state.notes.length ? (
        <List>
          {this.state.notes.map(note => {
       return (
       <ListItem key={note.id}>
-        <ShowmodalBtn onClick={this.showModal}>
-        Add a Note
-        </ShowmodalBtn>
+        
         </ListItem>
       
        
@@ -90,9 +109,16 @@ return (
        <h3> No Notes to Display</h3>
      )}
   </div>
-      );
+  </div>
+      <div className="row">
+        <div className="col s12 center-align">
+        <ShowmodalBtn className="waves-effect waves-light btn" onClick={this.showModal}>
+        Add a Note
+        </ShowmodalBtn>
+        </div>
+        </div>  
           
-      </div>
+     
       
       </div>
     );
