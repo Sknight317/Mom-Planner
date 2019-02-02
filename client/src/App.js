@@ -49,6 +49,7 @@ class App extends Component {
           <PrivateRoute exact path="/connect" component={Connect} />
           <PrivateRoute exact path="/calendar" component={Calendar} />
           <PrivateRoute exact path="/important" component={ImportantInfo} />
+          {/* <PrivateRoute exact path='/error' component={ErrorDisplay}/> */}
        </Switch>
       </div>
       </Router>

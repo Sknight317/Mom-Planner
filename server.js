@@ -2,7 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const users = require("./routes/api/users");
-const todoRoutes = require("./routes/api/todo")
+
+// const todoRoutes = require("./routes/api/todo");
+const fetch = require('node-fetch');
+// const searchYelp = require("./routes/api/searchplaces");
+require('dotenv').config();
 // mongoose.plugin(schema => { schema.options.usePushEach = true });
 // const routes = require("./routes");
 // const path = require("path");
@@ -39,16 +43,104 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
-app.use("/api/", todoRoutes);
-
+// app.use("/api", router)
+// app.use("/api/", todoRoutes);
+// app.use("api/searchplaces", searchYelp);
 // catch 404
 app.use((req, res, next) => {
   res.status(404).send('<h2 align=center>Page Not Found!</h2>');
 });
 
-// app.get('/', (req, res) => {
-// 	res.send('Hello');
+// router.get('/', (req, res) => {
+// 	res.send({message:'Hello'});
 // });
+
+// config = {
+//   headers: {
+//     Authorization: 'Bearer '+ process.env.YELP_API,
+//   },
+//   params: {
+//     term: 'Tourists Must See List',
+//   }
+// // let zipcode;
+app.get( '/api/search-place',(req, res) => {
+  const apiKey = process.env.YELP_API;
+  const Yelp = {
+    search(term, location, sortBy){
+      return fetch(`/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, {
+        headers: {
+          Authorization: `Bearer ${apiKey}`
+        }
+      }).then(response => {
+        return response.json();
+      }).then(jsonResponse => {
+        if(jsonResponse.businesses){
+          return jsonResponse.businesses.map(business => ({
+              id: business.id,
+              imageSrc: business.image_url,
+              name: business.name,
+              address: business.address1,
+              city: business.location.city,
+              state: business.location.state,
+              zipCode: business.location.zip_code,
+              category: business.categories[0].title,
+              rating: business.rating,
+              reviewCount: business.review_count
+          }));
+        }
+      });
+    }
+  };
+   
+//     return axios
+//       .get('https://api.yelp.com/v3/businesses/search', config)
+//       .then(responseJson => {
+//         console.log(responseJson)
+//       })
+//       .catch(error => {
+//         console.log(error);
+//       });
+  
+// 		zipcode = req.body.zipcode;
+//         console.log(zipcode)
+// 		if(!zipcode || zipcode.length < 5 || zipcode.length > 5) {
+// 			res.redirect('/error');
+// 		} else { 
+// 			res.redirect('/important');
+//         }
+        
+	})
+
+
+// //Function to get info from yelp api
+// app.get( '/api/search-place',(req, res) => {
+
+//     'use strict';
+    
+//     const yelp = require('yelp-fusion');
+    
+//     const apiKey = process.env.YELP_API
+    
+//     const searchRequest = {
+//       term: "zoo",
+//       categories:'Kids Activities',
+//       location: "Orlando, FL"
+//     };
+    
+//     const client = yelp.client(apiKey);
+     
+//     client.search(searchRequest).then(response => {
+//       const Result = response.jsonBody.businesses;
+//       const prettyJson = JSON.stringify(Result, null, 4);
+//       console.log(prettyJson);
+//     }).catch(e => {
+//       console.log(e);
+//       // res.redirect('/error');
+//     });
+      
+    
+    // })
+
 
 // Send every other request to the React app
 // Define any API routes before this runs

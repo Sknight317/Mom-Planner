@@ -7,7 +7,7 @@ import { List, ListItem } from "../ShoppingList/index";
 import Modal from "../Modal";
 import ShowmodalBtn from "../ShowmodalBtn";
 import M from 'materialize-css';  
-
+import AddNewNote from "../../components/AddNewNote"
 class Calendar extends Component {
       state = {
       notes: [],
@@ -29,11 +29,35 @@ hideModal = () => {
     this.setState({ show: false });
 };
 
-addNewNote = event => {
-event.preventdefault();
-alert("add button clicked")
+addNewNote = () => {
+// event.preventdefault();
+
+alert("add button clicked");
+var e = document.getElementById("pick");
+var name = e.options[e.selectedIndex].value;
+console.log("value: " + name);
+if(name === 1) {
+this.addtoGroceries();
+} if (name === 2) {
+this.addtoAppointments();
+} if (name === 3) {
+  this.addtoTodo();
+}
+this.hideModal()
 }
 
+
+addtoGroceries =() => {
+  console.log("added to groceries!!")
+}
+
+addtoAppointments =() => {
+  alert("added to appointments!!")
+}
+
+addtoTodo =()=>{
+  alert("added to To do!!")
+}
 componentDidMount() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
@@ -77,13 +101,15 @@ return (
       <Modal show={this.state.show} handleClose={this.hideModal}>
       <div class="input-field col s12">
       
-    <select>
+    <select id="pick">
       <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
+      <option value="1">Groceries</option>
+      <option value="2">To Do</option>
+      <option value="3">Appointments</option>
     </select>
-    <label>Materialize Select</label>
+    <AddNewNote className="waves-effect waves-light btn" onClick={this.addNewNote}>
+    </AddNewNote >
+    {/* <label>Materialize Select</label> */}
   </div>
       </Modal>
       <div className="row">
@@ -115,8 +141,11 @@ return (
         <ShowmodalBtn className="waves-effect waves-light btn" onClick={this.showModal}>
         Add a Note
         </ShowmodalBtn>
+        <div id="appointments"></div>
+        <div id="Groceries"></div>
+        <div id="To-do"></div>
         </div>
-        </div>  
+        </div>
           
      
       
