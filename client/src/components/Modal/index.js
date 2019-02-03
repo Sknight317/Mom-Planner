@@ -5,13 +5,13 @@ export function Modal({ handleClose, show, children}) {
     const showHideClassname = show ? "modal display-block" : "modal display-none";
   
     return (
-      <div className={showHideClassname}>
+      <div className={showHideClassname} id="outer-div">
         <section className="modal-main">
         <div class="modal-header">
  
-      <button onClick={handleClose} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <button onClick={handleClose} aria-label="Close"><span aria-hidden="true">×</span></button>
 
-      <h4 class="modal-title" id="myModalLabel">Custom sized Modal</h4>
+      <h4 class="modal-title" id="myModalLabel">Choose where to place your note</h4>
 
     </div>  
         {/* <span class="closeBtn" onClick={handleClose}>&times;</span> */}
@@ -19,6 +19,7 @@ export function Modal({ handleClose, show, children}) {
         {children}
           {/* <button onClick={handleClose}>close</button> */}
         </section>
+        
       </div>
     );
   };

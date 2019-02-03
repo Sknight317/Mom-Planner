@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
     type: Date,
     default: Date.now
   },
-  fullname: {
+  name: {
     type: String,
   },
   todoText: {

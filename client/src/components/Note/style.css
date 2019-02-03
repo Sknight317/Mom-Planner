@@ -1,0 +1,13 @@
+.note {
+    /* background-image: url("../../images/yellowpost.jpg"); */
+    background-color: pink;
+    height: 200px;
+    width: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+}
+.words {
+    font-family:'Give You Glory', cursive;
+    font-size: 18px;
+}

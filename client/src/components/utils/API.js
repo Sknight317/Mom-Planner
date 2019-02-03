@@ -1,29 +1,20 @@
-const apiKey = process.env.YELP_API;
-const Yelp = {
-  search(term, location, sortBy){
-    return fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, {
-      headers: {
-        Authorization: `Bearer ${apiKey}`
-      }
-    }).then(response => {
-      return response.json();
-    }).then(jsonResponse => {
-      if(jsonResponse.businesses){
-        return jsonResponse.businesses.map(business => ({
-            id: business.id,
-            imageSrc: business.image_url,
-            name: business.name,
-            address: business.address1,
-            city: business.location.city,
-            state: business.location.state,
-            zipCode: business.location.zip_code,
-            category: business.categories[0].title,
-            rating: business.rating,
-            reviewCount: business.review_count
-        }));
-      }
-    });
+import axios from "axios";
+
+export default {
+  // Gets all books
+  getTodos: function() {
+    return axios.get("/api/todos");
+  },
+  // Gets the book with the given id
+  getTodo: function(id) {
+    return axios.get("/api/todos/" + id);
+  },
+  // Deletes the book with the given id
+  deleteTodo: function(id) {
+    return axios.delete("/api/todos/" + id);
+  },
+  // Saves a book to the database
+  saveTodo: function(bookData) {
+    return axios.post("/api/todos", bookData);
   }
 };
-
-export default Yelp;

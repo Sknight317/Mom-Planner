@@ -7,13 +7,19 @@ import { List, ListItem } from "../ShoppingList/index";
 import Modal from "../Modal";
 import ShowmodalBtn from "../ShowmodalBtn";
 import M from 'materialize-css';  
-import AddNewNote from "../../components/AddNewNote"
+import AddNewNote from "../../components/AddNewNote";
+import Note from "../../components/Note";
+import API from "../utils/API";
+
 class Calendar extends Component {
       state = {
-      notes: [],
-      text: "",
+      grocerynotes: [],
+      message: "",
       show: false,
-      showMenu: false
+      showMenu: false,
+      appendedGrocery: false,
+      text: "",
+      title: ""
     };
   onLogoutClick = e => {
     e.preventDefault();
@@ -34,21 +40,36 @@ addNewNote = () => {
 
 alert("add button clicked");
 var e = document.getElementById("pick");
-var name = e.options[e.selectedIndex].value;
-console.log("value: " + name);
-if(name === 1) {
-this.addtoGroceries();
-} if (name === 2) {
-this.addtoAppointments();
-} if (name === 3) {
-  this.addtoTodo();
-}
-this.hideModal()
+var Modname = e.options[e.selectedIndex].value;
+console.log("value: " + Modname);
+this.setState({title: Modname});
+// this.setState({text: x});
+const newgrocerynotes = this.state.grocerynotes
+newgrocerynotes.push({title: this.state.title});
+this.setState({grocerynotes: newgrocerynotes});
+if(Modname === "Groceries") {
+this.addtoGroceries()
+} if (this.state.Modname === 2) {
+this.addtoAppointments()
+} if (this.state.Modname === 3) {
+  this.addtoTodo()
 }
 
+}
 
+handleChange = (e)=>{
+  this.setState({selectValue:e.target.value});
+}
 addtoGroceries =() => {
-  console.log("added to groceries!!")
+  console.log("added to groceries!!");
+  this.hideModal();
+  this.setState({appendedGrocery: true});
+  API.saveTodo({
+    title: this.state.title,
+    // todoText: this.state.text
+  })
+  
+  .catch(err => console.log(err));
 }
 
 addtoAppointments =() => {
@@ -63,7 +84,16 @@ componentDidMount() {
     var instances = M.FormSelect.init(elems);
 }
 render() {
+    const show = this.state.show;
+    if (show) {
+      
+    }
+    const appendedGrocery = this.state.appendedGrocery;
     const { user } = this.props.auth;
+    const message='You selected '+this.state.selectValue + '.';
+  //   if (appendedGrocery) {
+  //     newNote = <Note/>
+  // } 
 return (
   <div className="container">
   <Navbarlogin />
@@ -99,18 +129,27 @@ return (
           </div> 
       
       <Modal show={this.state.show} handleClose={this.hideModal}>
-      <div class="input-field col s12">
+      {/* <div class="input-field col s12"> */}
       
-    <select id="pick">
+    <select id="pick" value={this.state.selectValue} onChange={this.handleChange} 
+    >
+     
       <option value="" disabled selected>Choose your option</option>
-      <option value="1">Groceries</option>
-      <option value="2">To Do</option>
-      <option value="3">Appointments</option>
+      <option value="Groceries">Groceries</option>
+      <option value="To Do">To Do</option>
+      <option value="Appointments">Appointments</option>
     </select>
+    <p>{message}</p>
+  
+    {/* <div> */}
+          <label data-error="wrong" data-success="right" for="form8">Your Note</label>
+          <textarea value={this.state.text} rows="4" id="user-message"class="form-control" placeholder="Enter your Message"></textarea>
+          
+    {/* </div> */}
     <AddNewNote className="waves-effect waves-light btn" onClick={this.addNewNote}>
     </AddNewNote >
     {/* <label>Materialize Select</label> */}
-  </div>
+  {/* </div> */}
       </Modal>
       <div className="row">
           <div className="col s12 center-align">
@@ -119,19 +158,22 @@ return (
         </div>
         <div className="row">
           <div className="col s12 center-align"> 
-      {this.state.notes.length ? (
-       <List>
-         {this.state.notes.map(note => {
+      {appendedGrocery ? (
+         <div>
+         {this.state.grocerynotes.map(note => {
       return (
-      <ListItem key={note.id}>
-        
-        </ListItem>
+      <List>
+        <Note key={note.id}>
+        <p>{note.title}</p>
+        {/* <p>{note.text}</p> */}
+        </Note>
+        </List>
       
        
       );
-     })} 
-     </List>
-     ) : (
+    })};
+     </div>
+      ) : (
        <h3> No Notes to Display</h3>
      )}
   </div>
@@ -142,7 +184,10 @@ return (
         Add a Note
         </ShowmodalBtn>
         <div id="appointments"></div>
-        <div id="Groceries"></div>
+        <div id="Groceries">
+        <p appended="true">Hi, why isn't the h2 being appended here? {this.state.appendedH2}</p>
+        
+        </div>
         <div id="To-do"></div>
         </div>
         </div>
