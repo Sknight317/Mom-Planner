@@ -1,0 +1,13 @@
+.appointments {
+    background-color: grey;
+    flex-direction: row;
+  flex-wrap: wrap;
+  
+}
+
+.grocery {
+    background-color: yellow;
+    flex-direction: row;
+  flex-wrap: wrap;
+  
+}

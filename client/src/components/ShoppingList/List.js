@@ -6,5 +6,5 @@ export function List({ children }) {
     <div id="grocery" className="container valign-wrapper">  
       <ul className="list-group">{children}</ul>
     </div>
-  );
+  )
 }

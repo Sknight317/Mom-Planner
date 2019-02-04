@@ -26,17 +26,17 @@
   
   .modal-header {
  
-    background-color: #337AB7;
+    background-color: #76D7D6;
  
     padding:16px 16px;
  
     color:#FFF;
  
-    border-bottom:2px dashed #337AB7;
-    z-index: 6;
+    border-bottom:2px dashed  #76D7D6;
+    
  }
  .modal-main {
-   
+   z-index: 6;
  }
   .display-block {
     display: block;
@@ -55,4 +55,7 @@
     text-decoration: none;
     color: #000;
 
+  }
+  .input {
+    width: 60%;
   }

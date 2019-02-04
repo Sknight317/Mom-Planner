@@ -6,7 +6,7 @@ function Note(props) {
 
     return (
         
-    <div className="note">
+    <div className="note" {...props} >
     <p className="words">This is a note.</p>
     </div>
     )

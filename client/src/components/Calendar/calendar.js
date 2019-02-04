@@ -10,46 +10,72 @@ import M from 'materialize-css';
 import AddNewNote from "../../components/AddNewNote";
 import Note from "../../components/Note";
 import API from "../utils/API";
-
+import "./style.css";
+import axios from "axios";
 class Calendar extends Component {
       state = {
       grocerynotes: [],
+      appointmentnotes: [],
       message: "",
       show: false,
       showMenu: false,
       appendedGrocery: false,
+      selectValue: "",
+      title: "",
       text: "",
-      title: ""
+      appendedAppointment: false,
+      bgColor: ['#F8C5DO', '#F6E7A3', '#ABE3E5', '#F988B7', '#76D7D6'],
+      selectedColor: '',
+      selectValue: "",
     };
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
     
   };
-
+componentDidMount() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+    
+}
 showModal = () => {
     this.setState({ show: true });
+    
 };
 
 hideModal = () => {
     this.setState({ show: false });
+    // const box = document.getElementById("user-message");
+    // box.Text = ""
 };
 
 addNewNote = () => {
 // event.preventdefault();
-
+this.getRandomColor()
 alert("add button clicked");
-var e = document.getElementById("pick");
-var Modname = e.options[e.selectedIndex].value;
+const e = document.getElementById("pick");
+const Modname = e.options[e.selectedIndex].value;
 console.log("value: " + Modname);
-this.setState({title: Modname});
-// this.setState({text: x});
-const newgrocerynotes = this.state.grocerynotes
-newgrocerynotes.push({title: this.state.title});
-this.setState({grocerynotes: newgrocerynotes});
+// this.setState({selectValue: this.state.selectValue});
+console.log("state type: " +this.state.selectValue)
+const tbox = document.getElementById("user-message").value;
+
+console.log("value text: " + tbox);
+// this.setState({text: this.state.text});
+console.log("state text: " +this.state.text)
 if(Modname === "Groceries") {
+// const newgrocerynotes = this.state.grocerynotes
+// newgrocerynotes.push({selectValue: this.state.selectValue});
+// this.setState({grocerynotes: newgrocerynotes});
+let newgrocerynotes = [...this.state.grocerynotes];
+newgrocerynotes.push({ selectValue: this.state.selectValue });
+this.setState({grocerynotes: newgrocerynotes });
+console.log("array-state: " + this.state.grocerynotes)  
 this.addtoGroceries()
-} if (this.state.Modname === 2) {
+} if (Modname === "Appointments") {
+const newappointments = this.state.appointmentnotes;
+newappointments.push({title: this.state.title});
+this.setState({appointmentnotes: newappointments});  
 this.addtoAppointments()
 } if (this.state.Modname === 3) {
   this.addtoTodo()
@@ -57,52 +83,79 @@ this.addtoAppointments()
 
 }
 
+getRandomColor(){
+  const bgColor = this.state.bgColor;
+  const item = bgColor[Math.floor(Math.random()*bgColor.length)];
+  this.setState({
+    selectedColor: item,
+  })
+  console.log("color: " + this.state.selectedColor);
+}
 handleChange = (e)=>{
   this.setState({selectValue:e.target.value});
 }
+
 addtoGroceries =() => {
   console.log("added to groceries!!");
   this.hideModal();
   this.setState({appendedGrocery: true});
+  axios({
+    method: 'post',
+    url: '/api/todo',
+    data: {
+      title: this.state.title,
+    }
+  })
+    .then(res => {
+      console.log(res.data)
+      console.log("Note posted");
+     
+    })
+    .catch(err => console.log(err)); 
+  
+  
+}
+
+addtoAppointments =() => {
+  console.log("added to appointments!!");
+  this.hideModal();
+  this.setState({appendedAppointment: true});
   API.saveTodo({
     title: this.state.title,
     // todoText: this.state.text
   })
-  
   .catch(err => console.log(err));
-}
-
-addtoAppointments =() => {
-  alert("added to appointments!!")
 }
 
 addtoTodo =()=>{
   alert("added to To do!!")
 }
-componentDidMount() {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems);
-}
+
+handleInputChange = event => {
+  const { name, value } = event.target;
+  this.setState({
+    [name]: value
+  });
+};
 render() {
     const show = this.state.show;
     if (show) {
       
     }
     const appendedGrocery = this.state.appendedGrocery;
+    const appendedAppointment = this.state.appendedAppointment;
     const { user } = this.props.auth;
     const message='You selected '+this.state.selectValue + '.';
-  //   if (appendedGrocery) {
-  //     newNote = <Note/>
-  // } 
+  
 return (
-  <div className="container">
-  <Navbarlogin />
-  <div className="container valign-wrapper">  
+  
  
+  <div>  
+  <Navbarlogin />
       
       
         <div className="row">
-          <div className="col l12 center-align">
+          <div className="col s12 m12 l12 center-align">
           
           <h4>
               <b>Hey,</b> {user.name.split(" ")[0]}
@@ -124,8 +177,6 @@ return (
             </button>
           </div>
           
-          </div>
-            
           </div> 
       
       <Modal show={this.state.show} handleClose={this.hideModal}>
@@ -136,37 +187,40 @@ return (
      
       <option value="" disabled selected>Choose your option</option>
       <option value="Groceries">Groceries</option>
-      <option value="To Do">To Do</option>
+      <option value="ToDo">To Do</option>
       <option value="Appointments">Appointments</option>
     </select>
     <p>{message}</p>
   
     {/* <div> */}
           <label data-error="wrong" data-success="right" for="form8">Your Note</label>
-          <textarea value={this.state.text} rows="4" id="user-message"class="form-control" placeholder="Enter your Message"></textarea>
+          <textarea value={this.state.text} name="text" onChange={this.handleInputChange}  rows="4" id="user-message"class="form-control" placeholder="Enter your Message"></textarea>
           
     {/* </div> */}
-    <AddNewNote className="waves-effect waves-light btn" onClick={this.addNewNote}>
+    <AddNewNote className="waves-effect waves-light btn" onClick={(event) => this.addNewNote(event)}>
     </AddNewNote >
     {/* <label>Materialize Select</label> */}
   {/* </div> */}
       </Modal>
       <div className="row">
-          <div className="col s12 center-align">
-        <h3>My Notes</h3>
-        </div>
-        </div>
-        <div className="row">
-          <div className="col s12 center-align"> 
-      {appendedGrocery ? (
+      <h3>My Notes</h3>
+          <div className="col s4 m8 l9 grocery"> 
+        
+      {appendedGrocery ?(
+        
          <div>
+          <h2>My Groceries</h2> 
          {this.state.grocerynotes.map(note => {
       return (
       <List>
-        <Note key={note.id}>
+        
+          
+        <Note key={note.id}
+        style={{backgroundColor: this.state.selectedColor}}>
         <p>{note.title}</p>
         {/* <p>{note.text}</p> */}
         </Note>
+       
         </List>
       
        
@@ -174,7 +228,35 @@ return (
     })};
      </div>
       ) : (
-       <h3> No Notes to Display</h3>
+       <h3> No Groceries to Display</h3>
+     )}
+  </div>
+  </div>
+
+       <div className="row">
+          <div className="col s4 m8 l9 appointments"> 
+      {appendedAppointment ?(
+         <div>
+          <h2>My Appointments</h2> 
+         {this.state.appointmentnotes.map(appointment => {
+      return (
+      <List>
+        
+          
+        <Note key={appointment.id}
+        style={{backgroundColor: this.state.selectedColor}}>
+        <p>{appointment.title}</p>
+        {/* <p>{appointment.text}</p> */}
+        </Note>
+        
+        </List>
+      
+       
+      );
+    })};
+     </div>
+      ) : (
+       <h3> No appointments to Display</h3>
      )}
   </div>
   </div>
@@ -185,7 +267,6 @@ return (
         </ShowmodalBtn>
         <div id="appointments"></div>
         <div id="Groceries">
-        <p appended="true">Hi, why isn't the h2 being appended here? {this.state.appendedH2}</p>
         
         </div>
         <div id="To-do"></div>
@@ -193,8 +274,8 @@ return (
         </div>
           
      
+    </div> 
       
-      </div>
     );
   }
 }

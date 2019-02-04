@@ -11,7 +11,7 @@ export function Modal({ handleClose, show, children}) {
  
       <button onClick={handleClose} aria-label="Close"><span aria-hidden="true">×</span></button>
 
-      <h4 class="modal-title" id="myModalLabel">Choose where to place your note</h4>
+      <h4 class="modal-title" id="myModalLabel">Please choose a type of note</h4>
 
     </div>  
         {/* <span class="closeBtn" onClick={handleClose}>&times;</span> */}

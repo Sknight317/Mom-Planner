@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const users = require("./routes/api/users");
-
+const routes = require("./routes")
 // const todoRoutes = require("./routes/api/todo");
 const fetch = require('node-fetch');
 // const searchYelp = require("./routes/api/searchplaces");
@@ -43,6 +43,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
+app.use(routes);
 // app.use("/api", router)
 // app.use("/api/", todoRoutes);
 // app.use("api/searchplaces", searchYelp);
@@ -63,35 +64,7 @@ app.use((req, res, next) => {
 //     term: 'Tourists Must See List',
 //   }
 // // let zipcode;
-app.get( '/api/search-place',(req, res) => {
-  const apiKey = process.env.YELP_API;
-  const Yelp = {
-    search(term, location, sortBy){
-      return fetch(`/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, {
-        headers: {
-          Authorization: `Bearer ${apiKey}`
-        }
-      }).then(response => {
-        return response.json();
-      }).then(jsonResponse => {
-        if(jsonResponse.businesses){
-          return jsonResponse.businesses.map(business => ({
-              id: business.id,
-              imageSrc: business.image_url,
-              name: business.name,
-              address: business.address1,
-              city: business.location.city,
-              state: business.location.state,
-              zipCode: business.location.zip_code,
-              category: business.categories[0].title,
-              rating: business.rating,
-              reviewCount: business.review_count
-          }));
-        }
-      });
-    }
-  };
-   
+
 //     return axios
 //       .get('https://api.yelp.com/v3/businesses/search', config)
 //       .then(responseJson => {
@@ -109,7 +82,7 @@ app.get( '/api/search-place',(req, res) => {
 // 			res.redirect('/important');
 //         }
         
-	})
+
 
 
 // //Function to get info from yelp api
