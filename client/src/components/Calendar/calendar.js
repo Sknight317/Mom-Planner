@@ -15,18 +15,16 @@ import axios from "axios";
 class Calendar extends Component {
       state = {
       grocerynotes: [],
+      selectValue: "",
+      text: "",
       appointmentnotes: [],
       message: "",
       show: false,
       showMenu: false,
       appendedGrocery: false,
-      selectValue: "",
-      title: "",
-      text: "",
       appendedAppointment: false,
       bgColor: ['#F8C5DO', '#F6E7A3', '#ABE3E5', '#F988B7', '#76D7D6'],
       selectedColor: '',
-      selectValue: "",
     };
   onLogoutClick = e => {
     e.preventDefault();
@@ -36,7 +34,7 @@ class Calendar extends Component {
 componentDidMount() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
-    
+    this.loadTodos();
 }
 showModal = () => {
     this.setState({ show: true });
@@ -49,37 +47,46 @@ hideModal = () => {
     // box.Text = ""
 };
 
-addNewNote = () => {
-// event.preventdefault();
-this.getRandomColor()
+addNewNote = event => {
+event.preventDefault()
 alert("add button clicked");
-const e = document.getElementById("pick");
-const Modname = e.options[e.selectedIndex].value;
-console.log("value: " + Modname);
-// this.setState({selectValue: this.state.selectValue});
-console.log("state type: " +this.state.selectValue)
-const tbox = document.getElementById("user-message").value;
-
-console.log("value text: " + tbox);
-// this.setState({text: this.state.text});
-console.log("state text: " +this.state.text)
-if(Modname === "Groceries") {
-// const newgrocerynotes = this.state.grocerynotes
-// newgrocerynotes.push({selectValue: this.state.selectValue});
-// this.setState({grocerynotes: newgrocerynotes});
-let newgrocerynotes = [...this.state.grocerynotes];
-newgrocerynotes.push({ selectValue: this.state.selectValue });
-this.setState({grocerynotes: newgrocerynotes });
-console.log("array-state: " + this.state.grocerynotes)  
-this.addtoGroceries()
-} if (Modname === "Appointments") {
-const newappointments = this.state.appointmentnotes;
-newappointments.push({title: this.state.title});
-this.setState({appointmentnotes: newappointments});  
-this.addtoAppointments()
-} if (this.state.Modname === 3) {
-  this.addtoTodo()
+// this.getRandomColor()
+if(this.state.selectValue && this.state.text) {
+ API.saveTodo({
+    name: this.state.selectValue,
+    todoText: this.state.text,
+  })
+    .then(res => this.loadTodos())
+    .catch(err => console.log(err));
+    this.hideModal();
+    this.setState({appendedGrocery: true})
 }
+
+// const e = document.getElementById("pick");
+// const Modname = e.options[e.selectedIndex].value;
+// console.log("value: " + Modname);
+// // this.setState({selectValue: this.state.selectValue});
+// console.log("state type: " +this.state.selectValue)
+// const tbox = document.getElementById("user-message").value;
+
+// console.log("value text: " + tbox);
+// // this.setState({text: this.state.text});
+// console.log("state text: " +this.state.text)
+// if(Modname === "Groceries") {
+//  this.hideModal();
+//   this.setState({appendedGrocery: true});
+ 
+// // this.setState({grocerynotes: {selectValue: this.state.selectValue, text: this.state.text}});
+// // console.log("array-state: " + JSON.stringify(this.state.grocerynotes))  
+
+// } if (Modname === "Appointments") {
+// const newappointments = this.state.appointmentnotes;
+// newappointments.push({title: this.state.title});
+// this.setState({appointmentnotes: newappointments});  
+// this.addtoAppointments()
+// } if (this.state.Modname === 3) {
+//   this.addtoTodo()
+// }
 
 }
 
@@ -92,30 +99,22 @@ getRandomColor(){
   console.log("color: " + this.state.selectedColor);
 }
 handleChange = (e)=>{
-  this.setState({selectValue:e.target.value});
+  this.setState({ selectValue:e.target.value});
 }
 
 addtoGroceries =() => {
-  console.log("added to groceries!!");
-  this.hideModal();
-  this.setState({appendedGrocery: true});
-  axios({
-    method: 'post',
-    url: '/api/todo',
-    data: {
-      title: this.state.title,
-    }
-  })
-    .then(res => {
-      console.log(res.data)
-      console.log("Note posted");
-     
-    })
-    .catch(err => console.log(err)); 
-  
   
 }
 
+loadTodos= ()=> {
+  API.getTodos()
+      .then(res => {
+        console.log(res)
+        this.setState({ grocerynotes: res.data, selectValue: "", text: "" })
+      
+})
+      .catch(err => console.log(err));
+}
 addtoAppointments =() => {
   console.log("added to appointments!!");
   this.hideModal();
@@ -137,6 +136,7 @@ handleInputChange = event => {
     [name]: value
   });
 };
+
 render() {
     const show = this.state.show;
     if (show) {
@@ -182,7 +182,7 @@ return (
       <Modal show={this.state.show} handleClose={this.hideModal}>
       {/* <div class="input-field col s12"> */}
       
-    <select id="pick" value={this.state.selectValue} onChange={this.handleChange} 
+    <select id="pick" value={this.state.selectValue} onChange={this.handleInputChange} name="selectValue"
     >
      
       <option value="" disabled selected>Choose your option</option>
@@ -197,7 +197,8 @@ return (
           <textarea value={this.state.text} name="text" onChange={this.handleInputChange}  rows="4" id="user-message"class="form-control" placeholder="Enter your Message"></textarea>
           
     {/* </div> */}
-    <AddNewNote className="waves-effect waves-light btn" onClick={(event) => this.addNewNote(event)}>
+    <AddNewNote className="waves-effect waves-light btn" 
+    disabled={!(this.state.text && this.state.selectValue)} onClick={this.addNewNote}>
     </AddNewNote >
     {/* <label>Materialize Select</label> */}
   {/* </div> */}
@@ -211,14 +212,16 @@ return (
          <div>
           <h2>My Groceries</h2> 
          {this.state.grocerynotes.map(note => {
+           const date = note.CreatedAt
       return (
       <List>
         
           
-        <Note key={note.id}
+        <Note key={note._id}
         style={{backgroundColor: this.state.selectedColor}}>
-        <p>{note.title}</p>
-        {/* <p>{note.text}</p> */}
+        <p className="text">{note.name }</p>
+        <p className="text">{note.todoText}</p>
+        <p className="text">{date}</p>
         </Note>
        
         </List>
@@ -245,8 +248,8 @@ return (
           
         <Note key={appointment.id}
         style={{backgroundColor: this.state.selectedColor}}>
-        <p>{appointment.title}</p>
-        {/* <p>{appointment.text}</p> */}
+        <p>{appointment.selectValue}</p>
+        <p>{appointment.text}</p>
         </Note>
         
         </List>

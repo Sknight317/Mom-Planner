@@ -1,11 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const todo = require("./routes/api/todo");
 const users = require("./routes/api/users");
-const routes = require("./routes")
-// const todoRoutes = require("./routes/api/todo");
 const fetch = require('node-fetch');
-// const searchYelp = require("./routes/api/searchplaces");
 require('dotenv').config();
 // mongoose.plugin(schema => { schema.options.usePushEach = true });
 // const routes = require("./routes");
@@ -42,11 +40,10 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 // Routes
+
 app.use("/api/users", users);
-app.use(routes);
-// app.use("/api", router)
-// app.use("/api/", todoRoutes);
-// app.use("api/searchplaces", searchYelp);
+app.use("/api/todo", todo);
+
 // catch 404
 app.use((req, res, next) => {
   res.status(404).send('<h2 align=center>Page Not Found!</h2>');
@@ -117,9 +114,9 @@ app.use((req, res, next) => {
 
 // Send every other request to the React app
 // Define any API routes before this runs
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);

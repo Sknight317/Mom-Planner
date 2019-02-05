@@ -5,6 +5,8 @@ const ToDoController = require("../../controllers/ToDocontroller");
 
 // Matches with "/api/todo"
 router.route("/")
+// passport.authenticate("jwt", { session: false })
+
   .get(ToDoController.findAll)
   .post(ToDoController.create);
 

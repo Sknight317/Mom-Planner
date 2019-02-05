@@ -8,6 +8,9 @@
 .grocery {
     background-color: yellow;
     flex-direction: row;
-  flex-wrap: wrap;
+    flex-wrap: wrap;
   
+}
+.text {
+  text-align: center;
 }

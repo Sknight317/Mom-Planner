@@ -11,9 +11,11 @@ const Schema = mongoose.Schema;
   },
   name: {
     type: String,
+  
   },
   todoText: {
     type: String,
+    
   }
 });
 
