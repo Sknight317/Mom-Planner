@@ -14,3 +14,8 @@
 .text {
   text-align: center;
 }
+.text-title {
+  text-align: center;
+  font-size: 18px;
+  text-decoration: underline
+}

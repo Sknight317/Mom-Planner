@@ -12,6 +12,10 @@ import Note from "../../components/Note";
 import API from "../utils/API";
 import "./style.css";
 import axios from "axios";
+import DeleteBtn from "../../components/DeleteBtn";
+import UpdateBtn from "../../components/UpdateBtn";
+import moment from 'moment';
+
 class Calendar extends Component {
       state = {
       grocerynotes: [],
@@ -23,7 +27,10 @@ class Calendar extends Component {
       showMenu: false,
       appendedGrocery: false,
       appendedAppointment: false,
-      bgColor: ['#F8C5DO', '#F6E7A3', '#ABE3E5', '#F988B7', '#76D7D6'],
+      appointmentnotecolor: ['#F8C5DO'],
+      todoNotecolor: ['#F6E7A3'], 
+      grocerynoteColor: ['#ABE3E5'],
+      //  '#F988B7', '#76D7D6'],
       selectedColor: '',
     };
   onLogoutClick = e => {
@@ -90,14 +97,16 @@ if(this.state.selectValue && this.state.text) {
 
 }
 
-getRandomColor(){
-  const bgColor = this.state.bgColor;
-  const item = bgColor[Math.floor(Math.random()*bgColor.length)];
-  this.setState({
-    selectedColor: item,
-  })
-  console.log("color: " + this.state.selectedColor);
-}
+// getRandomColor(){
+//   const bgColor = this.state.bgColor;
+//   const item = bgColor[Math.floor(Math.random()*bgColor.length)];
+//   this.setState({
+//     selectedColor: item,
+//   })
+//   console.log("color: " + this.state.selectedColor);
+// }
+
+
 handleChange = (e)=>{
   this.setState({ selectValue:e.target.value});
 }
@@ -114,6 +123,30 @@ loadTodos= ()=> {
       
 })
       .catch(err => console.log(err));
+}
+
+// Deletes a note from the database with a given id then reloads the note from the db
+deleteTodo = id => {
+  API.deleteTodo(id)
+    .then(res => this.loadTodos())
+    .catch(err => console.log(err));
+};
+
+editTodo = id => {
+  this.setState({show: true})
+  API.getTodo(id)({
+    name: this.state.selectValue,
+    todoText: this.state.text,
+  }).then(res => this.updateTodos())
+  .catch(err => console.log(err));
+}
+updateTodo = id => {
+  this.setState({show: true})
+  API.saveTodo(id)({
+    name: this.state.selectValue,
+    todoText: this.state.text,
+  }).then(res => this.loadTodos())
+  .catch(err => console.log(err));
 }
 addtoAppointments =() => {
   console.log("added to appointments!!");
@@ -137,6 +170,26 @@ handleInputChange = event => {
   });
 };
 
+// handleTextChange = (id)=> {
+//   var data = {
+//     todoText: this.state.text,
+//     selectValue: this.state.selectValue
+//   };
+//   API.saveTodo(data,id)({
+//     name: this.state.selectValue,
+//     todoText: this.state.text,
+//   }).then(res => this.loadTodos())
+//   .catch(err => console.log(err));
+// }
+
+handleTextChange(e) {
+  if(e.keyCode != 13) return;
+  if(e.target.value == '') return;
+  if(e.target.value == '\n') {
+    e.target.value = '';
+    return;
+  }
+}
 render() {
     const show = this.state.show;
     if (show) {
@@ -212,16 +265,21 @@ return (
          <div>
           <h2>My Groceries</h2> 
          {this.state.grocerynotes.map(note => {
-           const date = note.CreatedAt
+           const date = note.CreatedAt;
+           const newDate = date.slice(0,10);
+           const niceDate =moment(newDate).format("dddd, MMMM M, YYYY");
       return (
       <List>
         
           
         <Note key={note._id}
-        style={{backgroundColor: this.state.selectedColor}}>
-        <p className="text">{note.name }</p>
+        style={{}}>
+        
+        <p className="text-title">{note.name }</p>
         <p className="text">{note.todoText}</p>
-        <p className="text">{date}</p>
+        <p className="text">Created: {niceDate}</p>
+        <DeleteBtn onClick={() => this.deleteTodo(note._id)} />
+        <UpdateBtn onclick={() => this.editTodo(note._id)} />
         </Note>
        
         </List>
@@ -249,7 +307,7 @@ return (
         <Note key={appointment.id}
         style={{backgroundColor: this.state.selectedColor}}>
         <p>{appointment.selectValue}</p>
-        <p>{appointment.text}</p>
+        <p onKeyUp={this.handleTextChange.bind(this)}>{appointment.text}</p>
         </Note>
         
         </List>

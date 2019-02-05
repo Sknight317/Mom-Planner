@@ -7,7 +7,7 @@ function Note({children}) {
     return (
         
     <div className="note">
-    <p className="words">{children}</p>
+    <p className="words">{children} </p>
     </div>
     )
   }
