@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import Navbarlogin from "../layout/NavbarLogin";
+import Navbar from "../../components/Navbar";
 import Slider from "../slider/index";
 class Dashboard extends Component {
   onLogoutClick = e => {
@@ -13,7 +13,7 @@ render() {
     const { user } = this.props.auth;
 return (
   <div>
-  <Navbarlogin />
+  <Navbar />
       <div className="container valign-wrapper">
       
         <div className="row">

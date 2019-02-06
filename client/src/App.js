@@ -5,7 +5,7 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
-// import Navbar from "./components/layout/Navbar";
+import Navbar from "./components/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/register";
 import Login from "./components/auth/login";
@@ -15,6 +15,7 @@ import Connect from "./components/Connect/connect";
 import Calendar from "./components/Calendar/calendar";
 import ImportantInfo from "./components/ImportantInfo/index"
 import './App.css';
+// import Home from "./components/layout/Home";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -40,7 +41,7 @@ class App extends Component {
       <Provider store={store}>
       <Router>
       <div className="App">
-      
+       
        <Route exact path="/" component={Landing} />
        <Route exact path="/register" component={Register} />
        <Route exact path="/login" component={Login} />

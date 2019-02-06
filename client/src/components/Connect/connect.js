@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import Navbarlogin from "../layout/NavbarLogin";
+// import Navbarlogin from "../layout/NavbarLogin";
+import Navbar from "../../components/Navbar"
 import $ from 'jquery'
 // import Slider from "../slider/index";
 class Connect extends Component {
@@ -71,7 +72,7 @@ render() {
     const { user } = this.props.auth;
 return (
   <div>
-  <Navbarlogin />
+  <Navbar />
       <div className="container valign-wrapper">
       
         <div className="row">

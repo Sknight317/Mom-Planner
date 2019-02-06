@@ -13,6 +13,7 @@ class Navbar extends Component {
   
   render() {
     return (
+      
         <nav>
         <div class="nav-wrapper">
           <Link to="/dashboard" class="brand-logo">Mom Planner</Link>
@@ -22,6 +23,7 @@ class Navbar extends Component {
             <li><Link to="/important">Important Info</Link></li>
             <li><Link to="/connect">Connect</Link></li>
             <li><Link to="/">Goal Tracker</Link></li>
+            <li><Link to="/home">Homes</Link></li>
           </ul>
         </div>
       </nav>

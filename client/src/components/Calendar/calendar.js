@@ -15,7 +15,7 @@ import axios from "axios";
 import DeleteBtn from "../../components/DeleteBtn";
 import UpdateBtn from "../../components/UpdateBtn";
 import moment from 'moment';
-
+import Navbar from "../../components/Navbar";
 class Calendar extends Component {
       state = {
       grocerynotes: [],
@@ -39,9 +39,10 @@ class Calendar extends Component {
     
   };
 componentDidMount() {
+    this.loadTodos();
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
-    this.loadTodos();
+  
 }
 showModal = () => {
     this.setState({ show: true });
@@ -119,9 +120,8 @@ loadTodos= ()=> {
   API.getTodos()
       .then(res => {
         console.log(res)
-        this.setState({ grocerynotes: res.data, selectValue: "", text: "" })
-      
-})
+      this.setState({ grocerynotes: res.data, selectValue:res.data.name, text: res.data.todoText })
+      })
       .catch(err => console.log(err));
 }
 
@@ -204,7 +204,7 @@ return (
   
  
   <div>  
-  <Navbarlogin />
+  <Navbar/>
       
       
         <div className="row">
@@ -285,8 +285,8 @@ return (
         </List>
       
        
-      );
-    })};
+      )
+    })}
      </div>
       ) : (
        <h3> No Groceries to Display</h3>
