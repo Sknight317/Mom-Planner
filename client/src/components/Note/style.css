@@ -1,11 +1,13 @@
 .note {
     /* background-image: url("../../images/406195-PEUW2Z-517.eps"); */
     background-color: pink;
-    height: 200px;
-    width: 200px;
+    height: 15em;
+    width: 15em;
     background-repeat: no-repeat;
     background-size: cover;
-  
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px
 }
 .words {
     font-family:'Give You Glory', cursive;

@@ -2,11 +2,11 @@ import React from "react";
 import "./style.css";
 
 
-function Note({children}) {
+function Note({children, props}) {
 
     return (
         
-    <div className="note">
+    <div className="note" {...props}>
     <p className="words">{children} </p>
     </div>
     )

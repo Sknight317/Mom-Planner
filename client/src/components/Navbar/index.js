@@ -23,11 +23,14 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Calendar from "../Calendar/calendar";
 import Connect from "../Connect/connect";
 import Dashboard from "../dashboard/Dashboard";
-import Landing from "../layout/Landing";
+
 import { Link } from "react-router-dom";
 import HomeIcon from '@material-ui/icons/Home';
 import NoteIcon from '@material-ui/icons/Note';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
+import style from  "./style.css";
 const styles = {
   root: {
     flexGrow: 1,
@@ -46,6 +49,11 @@ class MenuAppBar extends React.Component {
     auth: true,
     anchorEl: null,
     left: false,
+  };
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutUser();
+    
   };
 
   handleChange = event => {
@@ -71,18 +79,18 @@ class MenuAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <FormGroup>
+        <FormGroup >
           <FormControlLabel
             control={
-              <Switch checked={auth} onChange={this.handleChange} aria-label="LoginSwitch" />
+              <Switch checked={auth}   onChange={this.handleChange} aria-label="LoginSwitch" />
             }
             label={auth ? 'Logout' : 'Login'}
           />
         </FormGroup>
-        <AppBar position="static">
+        <AppBar style={{ background: 'black' }} position="static">
           <Toolbar>
             <IconButton onClick={this.toggleDrawer('left', true)}>
-              <MenuIcon />
+              <MenuIcon style={{ background: 'white'}}  />
               
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
@@ -157,6 +165,14 @@ class MenuAppBar extends React.Component {
 
 MenuAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
-
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 export default withStyles(styles)(MenuAppBar);
+connect(
+  mapStateToProps,
+  { logoutUser }
+)(MenuAppBar);
+

@@ -16,6 +16,7 @@ import DeleteBtn from "../../components/DeleteBtn";
 import UpdateBtn from "../../components/UpdateBtn";
 import moment from 'moment';
 import Navbar from "../../components/Navbar";
+
 class Calendar extends Component {
       state = {
       grocerynotes: [],
@@ -27,11 +28,8 @@ class Calendar extends Component {
       showMenu: false,
       appendedGrocery: false,
       appendedAppointment: false,
-      appointmentnotecolor: ['#F8C5DO'],
-      todoNotecolor: ['#F6E7A3'], 
-      grocerynoteColor: ['#ABE3E5'],
-      //  '#F988B7', '#76D7D6'],
-      selectedColor: '',
+       
+   
     };
   onLogoutClick = e => {
     e.preventDefault();
@@ -44,6 +42,7 @@ componentDidMount() {
     var instances = M.FormSelect.init(elems);
   
 }
+
 showModal = () => {
     this.setState({ show: true });
     
@@ -69,7 +68,6 @@ if(this.state.selectValue && this.state.text) {
     this.hideModal();
     this.setState({appendedGrocery: true})
 }
-
 // const e = document.getElementById("pick");
 // const Modname = e.options[e.selectedIndex].value;
 // console.log("value: " + Modname);
@@ -98,15 +96,17 @@ if(this.state.selectValue && this.state.text) {
 
 }
 
-// getRandomColor(){
-//   const bgColor = this.state.bgColor;
-//   const item = bgColor[Math.floor(Math.random()*bgColor.length)];
-//   this.setState({
-//     selectedColor: item,
-//   })
-//   console.log("color: " + this.state.selectedColor);
-// }
+  getColors = () => {
+  let colorValues = ['#F988B7', '#76D7D6', '#ABE3E5', '#F6E7A3','#F8C5DO'];
+  var notes = document.querySelectorAll(".box");
 
+  for(let i=0; i < notes.length; i++){
+    notes[i].style.backgroundColor = colorValues[Math.floor(Math.random() * colorValues.length)];
+  }  
+  }
+ 
+ 
+ 
 
 handleChange = (e)=>{
   this.setState({ selectValue:e.target.value});
@@ -120,9 +120,10 @@ loadTodos= ()=> {
   API.getTodos()
       .then(res => {
         console.log(res)
-      this.setState({ grocerynotes: res.data, selectValue:res.data.name, text: res.data.todoText })
+      this.setState({ grocerynotes: res.data})
       })
       .catch(err => console.log(err));
+      this.getColors();
 }
 
 // Deletes a note from the database with a given id then reloads the note from the db
@@ -169,7 +170,13 @@ handleInputChange = event => {
     [name]: value
   });
 };
-
+getBackground(i) {
+  const props = {
+    key: i,
+    background: `background ${this.getRandomColor()}`,
+  }
+  return (<Note {...props} />)
+}
 // handleTextChange = (id)=> {
 //   var data = {
 //     todoText: this.state.text,
@@ -190,20 +197,26 @@ handleTextChange(e) {
     return;
   }
 }
+getcolor = ()=> {
+      let colorValues = ['#F988B7', '#76D7D6', '#ABE3E5', '#F6E7A3','#F8C5DO'];
+      let newcolor = colorValues[Math.floor(Math.random() * colorValues.length)];
+      return newcolor
+    }
 render() {
     const show = this.state.show;
     if (show) {
       
     }
-    const appendedGrocery = this.state.appendedGrocery;
+    // const appendedGrocery = this.state.appendedGrocery;
     const appendedAppointment = this.state.appendedAppointment;
     const { user } = this.props.auth;
     const message='You selected '+this.state.selectValue + '.';
+    
   
 return (
   
  
-  <div>  
+  <div className="container l12" id="background">  
   <Navbar/>
       
       
@@ -232,7 +245,7 @@ return (
           
           </div> 
       
-      <Modal show={this.state.show} handleClose={this.hideModal}>
+      <Modal className="modal" show={this.state.show} handleClose={this.hideModal}>
       {/* <div class="input-field col s12"> */}
       
     <select id="pick" value={this.state.selectValue} onChange={this.handleInputChange} name="selectValue"
@@ -257,13 +270,13 @@ return (
   {/* </div> */}
       </Modal>
       <div className="row">
-      <h3>My Notes</h3>
-          <div className="col s4 m8 l9 grocery"> 
+      
+          <div className="col s4 m8 l12 grocery align-center"> 
         
-      {appendedGrocery ?(
+      {this.state.grocerynotes.length ? (
         
-         <div>
-          <h2>My Groceries</h2> 
+         <div className="note-box">
+          <h2 className="notes">My Notes</h2> 
          {this.state.grocerynotes.map(note => {
            const date = note.CreatedAt;
            const newDate = date.slice(0,10);
@@ -273,13 +286,18 @@ return (
         
           
         <Note key={note._id}
-        style={{}}>
+        className="box"
+        style={this.getcolor()}>
         
         <p className="text-title">{note.name }</p>
         <p className="text">{note.todoText}</p>
         <p className="text">Created: {niceDate}</p>
+        <div className="row">
+        <div className="col s4 m8 l9 center-align">
         <DeleteBtn onClick={() => this.deleteTodo(note._id)} />
         <UpdateBtn onclick={() => this.editTodo(note._id)} />
+        </div>
+        </div>
         </Note>
        
         </List>
@@ -289,38 +307,12 @@ return (
     })}
      </div>
       ) : (
-       <h3> No Groceries to Display</h3>
+       <h3 className="notes"> No Groceries to Display</h3>
      )}
   </div>
   </div>
 
-       <div className="row">
-          <div className="col s4 m8 l9 appointments"> 
-      {appendedAppointment ?(
-         <div>
-          <h2>My Appointments</h2> 
-         {this.state.appointmentnotes.map(appointment => {
-      return (
-      <List>
-        
-          
-        <Note key={appointment.id}
-        style={{backgroundColor: this.state.selectedColor}}>
-        <p>{appointment.selectValue}</p>
-        <p onKeyUp={this.handleTextChange.bind(this)}>{appointment.text}</p>
-        </Note>
-        
-        </List>
       
-       
-      );
-    })};
-     </div>
-      ) : (
-       <h3> No appointments to Display</h3>
-     )}
-  </div>
-  </div>
       <div className="row">
         <div className="col s12 center-align">
         <ShowmodalBtn className="waves-effect waves-light btn" onClick={this.showModal}>

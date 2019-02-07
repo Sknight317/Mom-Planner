@@ -1,15 +1,15 @@
-.appointments {
-    background-color: grey;
-    flex-direction: row;
+/* .appointments {
+  background-color: grey;
+  flex-direction: row;
   flex-wrap: wrap;
   
-}
+} */
 
 .grocery {
-    background-color: yellow;
-    flex-direction: row;
-    flex-wrap: wrap;
-  
+   background-color: yellow;
+   display: flex;
+   margin: 0 auto;
+   
 }
 .text {
   text-align: center;
@@ -18,4 +18,25 @@
   text-align: center;
   font-size: 18px;
   text-decoration: underline
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .modal {
+    width: 100%;
+  }
+}
+.notes {
+  text-align: center;
+}
+.note-box {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#background {
+  background-image: url("../../images/white-background.jpeg");
+}
+.container{
+  width: 100%;
+  max-width:initial;
+ 
 }
