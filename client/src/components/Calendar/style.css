@@ -1,15 +1,13 @@
-/* .appointments {
-  background-color: grey;
-  flex-direction: row;
-  flex-wrap: wrap;
-  
-} */
-
+@import url("https://fonts.googleapis.com/css?family=Orbitron|Pacifico|Rajdhani");
 .grocery {
-   background-color: yellow;
+   /* background-color: yellow; */
+   background-image: url("../../images/pexels-photo-97076.jpeg");
    display: flex;
    margin: 0 auto;
-   
+    display: -webkit-flex; /* Safari */
+  -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+  flex-direction: row;   
+  flex-wrap: wrap;
 }
 .text {
   text-align: center;
@@ -27,10 +25,11 @@
 }
 .notes {
   text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  color: white;
 }
 .note-box {
-  flex-direction: row;
-  flex-wrap: wrap;
+ 
 }
 #background {
   background-image: url("../../images/white-background.jpeg");
@@ -39,4 +38,25 @@
   width: 100%;
   max-width:initial;
  
+}
+.box:nth-child(even) {
+  -o-transform:rotate(4deg);
+  -webkit-transform:rotate(4deg);
+  -moz-transform:rotate(4deg);
+  position:relative;
+  top:5px;
+}
+.box:nth-child(3n) {
+  -o-transform:rotate(-3deg);
+  -webkit-transform:rotate(-3deg);
+  -moz-transform:rotate(-3deg);
+  position:relative;
+  top:-5px;
+}
+.box:nth-child(5n) {
+  -o-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+  position:relative;
+  top:-10px;
 }

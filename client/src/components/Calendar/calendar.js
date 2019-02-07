@@ -211,7 +211,7 @@ render() {
     const appendedAppointment = this.state.appendedAppointment;
     const { user } = this.props.auth;
     const message='You selected '+this.state.selectValue + '.';
-    
+    const number  = this.state.grocerynotes.length;
   
 return (
   
@@ -226,7 +226,7 @@ return (
           <h4>
               <b>Hey,</b> {user.name.split(" ")[0]}
               <p className="flow-text grey-text text-darken-1">
-                Plan your week!
+                Plan your out your week and stay organized! You have {number} notes!
               </p>
             </h4>
             <button
@@ -271,7 +271,7 @@ return (
       </Modal>
       <div className="row">
       
-          <div className="col s4 m8 l12 grocery align-center"> 
+          <div className="col s12 m12 l12 grocery align-center"> 
         
       {this.state.grocerynotes.length ? (
         
