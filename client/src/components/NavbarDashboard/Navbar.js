@@ -10,6 +10,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from "react-router-dom";
 import Navcss from "./style.css";
 
+const font = 'Orbitron, sans-serif';
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -17,10 +19,15 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
+  
+  Button: {
+    '&hover': {
+      boxShadow: '0 0.5em 0.5em -0.4em var(--hover) !important',
+      transform: 'translateY(-0.25em) !important',
+      fontWeight: 'bold'
+    }
+  }
+  
 };
 
 function ButtonAppBar(props) {
@@ -30,11 +37,13 @@ function ButtonAppBar(props) {
       <AppBar className="bar" position="static" style={{ background: 'black'}}>
         <Toolbar>
       
-          <Typography variant="h6" color="inherit" align="center" className={classes.grow}>
+          <Typography style={{fontFamily: font, fontSize: 30, color: 'white', textAlign: 'center'}}>
             Note Plan-It
           </Typography>
-          <Button component={Link} to="/login" color="inherit">Login</Button>
-          <Button component={Link} to="/register" color="inherit">Register</Button>
+          <div style={{float: 'right'}}>
+          <Button className={classes.Button} style={{color: '#fa4a87'}} component={Link} to="/login" >Login</Button>
+          <Button style={{color: '#fa4a87'}} component={Link} to="/register" >Register</Button>
+          </div>
         </Toolbar>
       </AppBar>
     </div>

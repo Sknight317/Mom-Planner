@@ -223,24 +223,21 @@ return (
         <div className="row">
           <div className="col s12 m12 l12 center-align">
           
-          <h4>
-              <b>Hey,</b> {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                Plan your out your week and stay organized! You have {number} notes!
+          <h4 className="heading">
+              Hey, {user.name.split(" ")[0]}
+              <p className="flow-text grey-text text-darken-1 ">
+                Stay organized and plan out your week! Click the add a new note button to get started. You have {number} notes!
               </p>
             </h4>
             <button
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem"
-              }}
               onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              className="waves-effect waves-light btn"
             >
               Logout
             </button>
+            <ShowmodalBtn className="waves-effect waves-light btn" onClick={this.showModal}>
+            Add a Note
+            </ShowmodalBtn>
           </div>
           
           </div> 
@@ -271,20 +268,21 @@ return (
       </Modal>
       <div className="row">
       
-          <div className="col s12 m12 l12 grocery align-center"> 
+          <div className="col s12 m12 l12 grocery"> 
         
       {this.state.grocerynotes.length ? (
         
          <div className="note-box">
-          <h2 className="notes">My Notes</h2> 
+          <h2 className="notes">My Notes</h2>
+          
          {this.state.grocerynotes.map(note => {
            const date = note.CreatedAt;
            const newDate = date.slice(0,10);
            const niceDate =moment(newDate).format("dddd, MMMM M, YYYY");
       return (
-      <List>
+      <List className="note-list">
         
-          
+          <ListItem>
         <Note key={note._id}
         className="box"
         style={this.getcolor()}>
@@ -293,13 +291,13 @@ return (
         <p className="text">{note.todoText}</p>
         <p className="text">Created: {niceDate}</p>
         <div className="row">
-        <div className="col s4 m8 l9 center-align">
+        <div className="col s4 m8 l9 center">
         <DeleteBtn onClick={() => this.deleteTodo(note._id)} />
         <UpdateBtn onclick={() => this.editTodo(note._id)} />
         </div>
         </div>
         </Note>
-       
+       </ListItem>
         </List>
       
        
@@ -311,24 +309,9 @@ return (
      )}
   </div>
   </div>
-
-      
-      <div className="row">
-        <div className="col s12 center-align">
-        <ShowmodalBtn className="waves-effect waves-light btn" onClick={this.showModal}>
-        Add a Note
-        </ShowmodalBtn>
-        <div id="appointments"></div>
-        <div id="Groceries">
+       
+        </div>
         
-        </div>
-        <div id="To-do"></div>
-        </div>
-        </div>
-          
-     
-    </div> 
-      
     );
   }
 }

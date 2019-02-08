@@ -1,41 +1,45 @@
-/* .list-overflow-container {
-  max-height: 545px;
-  border: 1px #DDDDDD solid;
-  border-radius: 4px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+.list-overflow-container {
+ 
+ 
 }
 
 .list-overflow-container ul {
-  margin: 0;
-}
-
-.list-overflow-container li {
-  border-radius: 0px;
-  border-left: none;
-  border-right: none;
-}
-
-.list-overflow-container li * {
-  cursor: pointer;
-}
-
-.list-overflow-container li a {
-  color: #2A878C;
-}
-
-.list-overflow-container li:first-child {
-  border-top: none;
-}
-
-.list-overflow-container li:last-child {
-  border-bottom: none;
-} */
-
-#grocery {
-  /* background-color: rgb(157, 255, 255); */
-  /* width: 30%; */
-  /* margin: 10px; */
-  display: block
   
+}
+ul.list-group {
+  display: -webkit-flex;
+  flex-direction: row;
+}
+
+.list-overflow-container:nth-child(even) {
+  -o-transform:rotate(4deg);
+  -webkit-transform:rotate(4deg);
+  -moz-transform:rotate(4deg);
+  position:relative;
+  top:5px;
+  
+}
+
+.list-overflow-container:nth-child(3n) {
+  -o-transform:rotate(-3deg);
+  -webkit-transform:rotate(-3deg);
+  -moz-transform:rotate(-3deg);
+  position:relative;
+  top:-5px;
+}
+
+li.list-group-container:nth-child(5n) {
+  -o-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+  position:relative;
+  top:-10px;
+   background-color: #F988B7
+}
+li.list-group-item:nth-child(even) {
+  /* display: flex;
+  flex-direction: wrap;
+  float: right; */
+  margin: 30px;
+ 
 }

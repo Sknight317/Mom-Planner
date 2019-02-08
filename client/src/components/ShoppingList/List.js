@@ -3,8 +3,8 @@ import "./List.css";
 
 export function List({ children }) {
   return (
-    <div id="grocery" className="container valign-wrapper">  
+    <div className="list-overflow-container">
       <ul className="list-group">{children}</ul>
     </div>
-  )
+  );
 }

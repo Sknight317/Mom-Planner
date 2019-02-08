@@ -2,39 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { Link } from "react-router-dom";
-import style from "./style.css"
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
-  
+  input: {
+    display: 'none',
+  },
 });
 
-function OutlinedButtons(props) {
+function ContainedButtons(props) {
   const { classes } = props;
   return (
     <div>
       
-      <Button variant="outlined" color="secondary" className={classes.button} component={Link} to="/register"  style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px",
-                  height: "60px",
-                  
-
-                }}>
+      <Button style={{width: "180px", height: '50px', fontWeight: '600', fontSize: '1rem', letterSpacing: "1.5px"}} variant="contained" color="secondary" className={classes.button}>
         Register
       </Button>
-      
-      
-      
+    
+    
+     
     </div>
   );
 }
 
-OutlinedButtons.propTypes = {
+ContainedButtons.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(OutlinedButtons);
+export default withStyles(styles)(ContainedButtons);

@@ -31,6 +31,8 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import style from  "./style.css";
+
+const font = 'Orbitron, sans-serif';
 const styles = {
   root: {
     flexGrow: 1,
@@ -41,7 +43,9 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+    color: 'black'
   },
+
 };
 
 class MenuAppBar extends React.Component {
@@ -89,31 +93,35 @@ class MenuAppBar extends React.Component {
         </FormGroup>
         <AppBar style={{ background: 'black' }} position="static">
           <Toolbar>
-            <IconButton onClick={this.toggleDrawer('left', true)}>
-              <MenuIcon style={{ background: 'white'}}  />
+            <IconButton  onClick={this.toggleDrawer('left', true)}>
+              <MenuIcon  />
               
             </IconButton>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              Mom Planner
+            <Typography style={{fontFamily: font, fontSize: 30, color: 'white'}} variant="h6" className={classes.grow}>
+            Note Plan-It
             </Typography>
             {auth && (
               <div>
-                <IconButton
+                <IconButton 
+                id="menu-buttons"
+                 
                   aria-owns={open ? 'menu-appbar' : undefined}
                   aria-haspopup="true"
                   onClick={this.handleMenu}
-                  color="inherit"
+                  
                   
                 >
                   <AccountCircle />
                 </IconButton>
                 <Menu
+                
                   id="menu-appbar"
                   anchorEl={anchorEl}
                   anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
                   }}
+                  
                   transformOrigin={{
                     vertical: 'top',
                     horizontal: 'right',

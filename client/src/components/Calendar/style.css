@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Orbitron|Pacifico|Rajdhani");
+@import url("https://fonts.googleapis.com/css?family=Fahkwang|Montserrat");
 .grocery {
    /* background-color: yellow; */
    background-image: url("../../images/pexels-photo-97076.jpeg");
-   display: flex;
-   margin: 0 auto;
-    display: -webkit-flex; /* Safari */
-  -webkit-flex-wrap: wrap; /* Safari 6.1+ */
-  flex-direction: row;   
-  flex-wrap: wrap;
+   width: 80% !important;
+   margin: 0 auto 0 auto;
+   text-align: center;
+}
+.center {
+ text-align: center;
 }
 .text {
   text-align: center;
@@ -25,38 +26,61 @@
 }
 .notes {
   text-align: center;
-  font-family: 'Orbitron', sans-serif;
-  color: white;
+  font-family: 'Fahkwang', sans-serif;
+  
 }
-.note-box {
- 
+#grocery {
+    display: -webkit-flex; /* Safari */
+  -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+  flex-direction: row;   
+  flex-wrap: wrap;
 }
 #background {
   background-image: url("../../images/white-background.jpeg");
+ 
 }
 .container{
   width: 100%;
   max-width:initial;
- 
 }
-.box:nth-child(even) {
+div.note-box {
+  width: 80%;
+  background-color: white;
+  float: right;
+  margin: 0;
+  display: -webkit-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  margin:20px 0;
+}
+/* .box:nth-child(even) {
   -o-transform:rotate(4deg);
   -webkit-transform:rotate(4deg);
   -moz-transform:rotate(4deg);
   position:relative;
   top:5px;
-}
-.box:nth-child(3n) {
+} */
+/* .box:nth-child(3n) {
   -o-transform:rotate(-3deg);
   -webkit-transform:rotate(-3deg);
   -moz-transform:rotate(-3deg);
   position:relative;
   top:-5px;
-}
-.box:nth-child(5n) {
+} */
+/* .box:nth-child(5n) {
   -o-transform:rotate(5deg);
   -webkit-transform:rotate(5deg);
   -moz-transform:rotate(5deg);
   position:relative;
   top:-10px;
+} */
+.heading{
+  font-size: 1.68rem;
+  font-family: 'Fahkwang', sans-serif;
+  color: #757575 !important;
+  font-weight: 600
+}
+.waves-effect {
+  margin: 5px;
 }

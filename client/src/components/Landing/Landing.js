@@ -19,10 +19,8 @@ class Landing extends Component {
         <div className="container" >
         
         <div className="row">
-        
-        
           <div className="col s12 center-align" id="words">
-
+            
             <h4 className="text">
               Organize<b> All</b> of your to-do lists in one simple place!
             </h4>
@@ -31,7 +29,7 @@ class Landing extends Component {
             </p>
             <br />
             <div className="col  l12 center-align">
-            <Button> <Link to="/register" />
+            <Button className="button-center"> <Link to="/register" />
                 Register
             </Button >
             </div>
