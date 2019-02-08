@@ -83,18 +83,18 @@ class MenuAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <FormGroup >
+        {/* <FormGroup >
           <FormControlLabel
             control={
               <Switch checked={auth}   onChange={this.handleChange} aria-label="LoginSwitch" />
             }
             label={auth ? 'Logout' : 'Login'}
           />
-        </FormGroup>
+        </FormGroup> */}
         <AppBar style={{ background: 'black' }} position="static">
           <Toolbar>
-            <IconButton  onClick={this.toggleDrawer('left', true)}>
-              <MenuIcon  />
+            <IconButton   onClick={this.toggleDrawer('left', true)}>
+              <MenuIcon style={{fill: 'white'}} />
               
             </IconButton>
             <Typography style={{fontFamily: font, fontSize: 30, color: 'white'}} variant="h6" className={classes.grow}>

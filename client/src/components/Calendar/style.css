@@ -3,9 +3,16 @@
 .grocery {
    /* background-color: yellow; */
    background-image: url("../../images/pexels-photo-97076.jpeg");
-   width: 80% !important;
-   margin: 0 auto 0 auto;
+   width: 85% !important;
+   margin: 0 auto !important;
    text-align: center;
+   display: block !important;
+   border-radius: 8px;
+   overflow: auto;
+   
+}
+.row, .col {
+  float: none !important;
 }
 .center {
  text-align: center;
@@ -16,7 +23,12 @@
 .text-title {
   text-align: center;
   font-size: 18px;
-  text-decoration: underline
+  /* text-decoration: underline; */
+  font-family: 'Fahkwang', sans-serif;
+  background: white;
+  margin-top:0;
+  border-radius: 2px
+  
 }
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
@@ -46,13 +58,13 @@
 div.note-box {
   width: 80%;
   background-color: white;
-  float: right;
-  margin: 0;
-  display: -webkit-flex;
+  margin: 0 auto;
+  /* display: -webkit-flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin:20px 0; */
   border-radius: 8px;
-  margin:20px 0;
+  
 }
 /* .box:nth-child(even) {
   -o-transform:rotate(4deg);
@@ -84,3 +96,8 @@ div.note-box {
 .waves-effect {
   margin: 5px;
 }
+/* .outside {
+  background-color: white;
+  margin: 0px 30px;
+  border-radius: 8px;
+} */

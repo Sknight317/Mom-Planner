@@ -1,6 +1,5 @@
 import React from "react";
-import DeleteBtn from "../DeleteBtn"
-import UpdateBtn from "../UpdateBtn"
+
 import "./style.css";
 
 function Note({children, props}) {
@@ -9,10 +8,6 @@ function Note({children, props}) {
         
     <div className="note" {...props}>
     <p className="words">{children} </p>
-    <div className="center">
-    <DeleteBtn  />
-    <UpdateBtn  />
-    </div>
     </div>
     )
   }
