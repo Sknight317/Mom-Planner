@@ -4,44 +4,76 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 // import Navbarlogin from "../layout/NavbarLogin";
 import Navbar from "../../components/Navbar"
-import $ from 'jquery'
+import axios from "axios"
 // import Slider from "../slider/index";
 class Connect extends Component {
+  state ={
+    data: [],
+    
+  }
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
   };
-  
-  show_alert=()=> {
-    declare var EVDB
-    var where   = document.getElementById("where");
-    var oArgs = {
-              app_key: "8fh9T8QtjLVjwLvP" ,
-              sort_order: "popularity",
-              page_size: 25 ,
-              where: where.value
-    };
-    EVDB.API.call("/events/get", oArgs, function(oData) {
-        console.log(JSON.stringify(oData) );
-      });
+
+  getEvents=event=> {
+    event.preventDefault();
+    alert("clicked")
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    let where = document.getElementById("where").value;
+    axios.get(proxyurl + "http://api.eventful.com/json/events/search?app_key=8fh9T8QtjLVjwLvP&where=" + where + "&page_size=25")
+        .then(result=> {
+            // console.log(result)
+            let items = [];
+            for(var i in result.data.events.event) {
+              items.push({
+              
+                title: result.data.events.event[i].title,
+                description: result.data.events.event[i].description,
+                city: result.data.events.event[i].city_name,
+                region: result.data.events.event[i].region_name,
+                start: result.data.events.event[i].start_time,
+                end: result.data.events.event[i].stop_time,
+                address: result.data.events.event[i].venue_address,
+                place: result.data.events.event[i].venue_name,
+                url: result.data.events.event[i].url,
+                // image: result.data.events.event[i].image.medium[i].url,
+              })
+              this.setState({data: items })
+            }
+            // this.setState({items:JSON.stringify(result.data.events.event)})
+            // this.setState({data:JSON.stringify(result.data.events.event)});
+            console.log(this.state.data)
+            // this.ConverData()
+        });
+       
   }
   
-  // show_alert2=()=> {
-     
-  //   //  var query   = document.getElementById("query");
-  //    var oArgs = {
-  //       app_key: "5f01abe127f1d92148ab7ddf1ddf0099",
-  //       q: query.value,
-  //       where: where.value,
-  //       "date": "2013061000-2015062000",
-  //       "include": "tags,categories",
-  //       page_size: 5,
-  //       sort_order: "popularity",
-  //    };
-  //    EVDB.API.call("/events/search", oArgs, function(oData) {
-  //       alert("your myObject is " + JSON.stringify(oData));
+  // ConverData = () => {
+  //       var items = this.state.items;
+  //       var itemsData = this.state.itemsData;
+  //       for (var i = 0; i < itemsData.length; i++) {
+  //         items.push(
+  //           itemsData.data[i].events[i].event
+  //         )
+  //         console.log(itemsData)
+  //       }
+  //     }
+  // show_alert=()=> {
+  //   var EVDB
+  //   var where   = document.getElementById("where");
+  //   var oArgs = {
+  //             app_key: "8fh9T8QtjLVjwLvP" ,
+  //             sort_order: "popularity",
+  //             page_size: 25 ,
+  //             where: where.value
+  //   };
+  //   EVDB.API.call("/events/get", oArgs, function(oData) {
+  //       console.log(JSON.stringify(oData) );
   //     });
   // }
+  
+
 
   // findGroups = (url, cb, data) => {
   //   if(!data) data = [];
@@ -101,25 +133,36 @@ class Connect extends Component {
 
 render() {
     const { user } = this.props.auth;
+    // const Items = this.state.data.map((item) =>
+    //     <p key={item.id}>{item.title}</p>
+    //     <p>{item.description}</p> 
+    //     <p key={item.id}>{item.city}</p> 
+    //     <p key={item.id}>{item.region}</p> 
+    //     <p key={item.id}>{item.start}</p> 
+    //     <p key={item.id}>{item.end}</p> 
+    //     <p key={item.id}>{item.address}</p> 
+    //     <p key={item.id}>{item.place}</p> 
+    //     <p key={item.id}>{item.url}</p>  
+    // );
 return (
-  <div>
-  <Navbar />
-      <div className="container valign-wrapper">
-      
+  
+      <div className="container l12">
+      <Navbar />
         <div className="row">
-          <div className="col l12 center-align">
+          <div className="col s12 m12 l12 center-align">
           
             <h4>
              
               <p className="flow-text grey-text text-darken-1">
-                Connect with other moms in your area! </p>
-                <h3>Type in your zip code to find mom groups near you.</h3>
+                Find local events near you! </p>
+                <h3>Type in your zip code to get started.</h3>
              
             </h4>
-            
+       </div>
+       </div>     
       <form class="col s12">
         <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s6 center-align">
             <input placeholder="Type your zip code" id="where" type="text" class="validate" />
             <label for="zip_code"></label>
             <button
@@ -130,24 +173,50 @@ return (
                 letterSpacing: "1.5px",
                 marginTop: "1rem"
               }}
-              onClick={this.Find}
+              onClick={this.getEvents}
               className="waves-effect waves-light btn"
             >
-              Search for mom's in your area
+              Search
             </button>
           </div>
           </div>
           </form>
-
-          </div>
-          
-          </div>
-            
+     <div className="row">
+        <div className="col s12 m12 l12 center-align">
+        {this.state.data.length ? (
+         
+        <div>
+        
+       {this.state.data.map(items => {   
+      return ( 
+      //     <ListItem>
+        <div key={items.id}
+        className="box">
+       
+        <p>{items.description}</p> 
+        <p>{items.city}</p> 
+        <p>{items.region}</p> 
+        <p>{items.start}</p> 
+        <p>{items.end}</p> 
+        <p>{items.address}</p> 
+        <p>{items.place}</p> 
+        <p>{items.url}</p>
+        </div>
+       
+      //  </ListItem>
       
-          
+     
+       
+      )
+    })}
       </div>
-       <div id="results"></div>
-      </div>
+      ) : (
+       <h3 className="notes"> No Notes Yet. </h3>
+     )}
+  </div>
+  </div>
+</div>
+   
       
     
     );
