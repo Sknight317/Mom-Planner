@@ -1,0 +1,16 @@
+ul.list-group {
+    
+}
+li.list-group-item {
+    width: 300px !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: inline-block;
+}
+*, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    box-sizing: border-box;
+}
+div.card {
+    display: inline;
+}

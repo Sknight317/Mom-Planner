@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 // import Navbarlogin from "../layout/NavbarLogin";
-import Navbar from "../../components/Navbar"
-import axios from "axios"
+import Navbar from "../../components/Navbar";
+import axios from "axios";
+import style from "./style.css";
+import { CardList, CardListItem} from "../../components/Card"
 // import Slider from "../slider/index";
 class Connect extends Component {
   state ={
@@ -23,7 +25,7 @@ class Connect extends Component {
     let where = document.getElementById("where").value;
     axios.get(proxyurl + "http://api.eventful.com/json/events/search?app_key=8fh9T8QtjLVjwLvP&where=" + where + "&page_size=25")
         .then(result=> {
-            // console.log(result)
+            console.log(result)
             let items = [];
             for(var i in result.data.events.event) {
               items.push({
@@ -37,7 +39,7 @@ class Connect extends Component {
                 address: result.data.events.event[i].venue_address,
                 place: result.data.events.event[i].venue_name,
                 url: result.data.events.event[i].url,
-                // image: result.data.events.event[i].image.medium[i].url,
+                // image: result.data.events.event[i].image,
               })
               this.setState({data: items })
             }
@@ -151,7 +153,7 @@ return (
         <div className="row">
           <div className="col s12 m12 l12 center-align">
           
-            <h4>
+            <h4 className="heading">
              
               <p className="flow-text grey-text text-darken-1">
                 Find local events near you! </p>
@@ -160,9 +162,9 @@ return (
             </h4>
        </div>
        </div>     
-      <form class="col s12">
+      <form class="col s12 search">
         <div class="row">
-          <div class="input-field col s6 center-align">
+          <div class="input-field col s6">
             <input placeholder="Type your zip code" id="where" type="text" class="validate" />
             <label for="zip_code"></label>
             <button
@@ -184,34 +186,30 @@ return (
      <div className="row">
         <div className="col s12 m12 l12 center-align">
         {this.state.data.length ? (
-         
-        <div>
-        
-       {this.state.data.map(items => {   
+      <CardList>
+       {this.state.data.map(items => {
+         const city = items.city;
+         const region = items.region;
+         const location = city + ", "+ region; 
       return ( 
-      //     <ListItem>
-        <div key={items.id}
-        className="box">
-       
-        <p>{items.description}</p> 
-        <p>{items.city}</p> 
-        <p>{items.region}</p> 
-        <p>{items.start}</p> 
-        <p>{items.end}</p> 
-        <p>{items.address}</p> 
-        <p>{items.place}</p> 
-        <p>{items.url}</p>
-        </div>
-       
-      //  </ListItem>
-      
-     
-       
+        <CardListItem
+        key={items.id}
+        title={items.title}
+        Description={items.description}
+        // <p>{items.city}</p> 
+        // <p>{items.region}</p> 
+        // <p>{items.start}</p> 
+        // <p>{items.end}</p>
+        location={location} 
+        Address={items.address}
+        Place={items.place} 
+        url={items.url}
+        />
       )
     })}
-      </div>
+      </CardList>
       ) : (
-       <h3 className="notes"> No Notes Yet. </h3>
+       <h3 className="notes"> No Events to Display. </h3>
      )}
   </div>
   </div>

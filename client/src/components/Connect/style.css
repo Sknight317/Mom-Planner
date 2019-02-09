@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Orbitron|Pacifico|Rajdhani");
+@import url("https://fonts.googleapis.com/css?family=Fahkwang|Montserrat");
+.heading {
+    font-size: 1.68rem;
+    font-family: 'Fahkwang', sans-serif;
+    color: #757575 !important;
+    font-weight: 600   
+}
+.input-field {
+    margin: 0 auto; 
+    width: 200px !important; 
+}
+button {
+    margin: 0 auto;
+}
+
