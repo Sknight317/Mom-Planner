@@ -8,6 +8,8 @@ import axios from "axios";
 import style from "./style.css";
 import { CardList, CardListItem} from "../../components/Card"
 // import Slider from "../slider/index";
+import AddBtn from "../AddBtn";
+import API from "../utils/API";
 class Connect extends Component {
   state ={
     data: [],
@@ -18,6 +20,22 @@ class Connect extends Component {
     this.props.logoutUser();
   };
 
+add = id => {
+  alert("button clicked");
+const item = this.state.data.find(item => item.id === id);
+   API.saveEvent({
+        id: item.id,
+        title: item.title,
+        address: item.address,
+        place: item.place,
+        url: item.url,
+        description: item.description,
+        city: item.city,
+        region: item.region,
+        saved: true
+      })
+}
+  
   getEvents=event=> {
     event.preventDefault();
     alert("clicked")
@@ -39,8 +57,10 @@ class Connect extends Component {
                 address: result.data.events.event[i].venue_address,
                 place: result.data.events.event[i].venue_name,
                 url: result.data.events.event[i].url,
-                // image: result.data.events.event[i].image,
+                image: result.data.events.event[i].image,
+                id: result.data.events.event[i].id
               })
+            
               this.setState({data: items })
             }
             // this.setState({items:JSON.stringify(result.data.events.event)})
@@ -157,7 +177,7 @@ return (
              
               <p className="flow-text grey-text text-darken-1">
                 Find local events near you! </p>
-                <h3>Type in your zip code to get started.</h3>
+                <p>Type in your zip code to get started.</p>
              
             </h4>
        </div>
@@ -183,36 +203,48 @@ return (
           </div>
           </div>
           </form>
-     <div className="row">
-        <div className="col s12 m12 l12 center-align">
+    
         {this.state.data.length ? (
-      <CardList>
+      <div className="container" id="contain">
+       <div className="row grid">
+        <div className="col s3 l4" id="column">
        {this.state.data.map(items => {
          const city = items.city;
          const region = items.region;
          const location = city + ", "+ region; 
+        //  const pic = items.image.url;
       return ( 
-        <CardListItem
-        key={items.id}
-        title={items.title}
-        Description={items.description}
-        // <p>{items.city}</p> 
-        // <p>{items.region}</p> 
-        // <p>{items.start}</p> 
-        // <p>{items.end}</p>
-        location={location} 
-        Address={items.address}
-        Place={items.place} 
-        url={items.url}
-        />
+        
+  <div class="card small" key={items.id} >
+  {/* <div class="card-image waves-effect waves-block waves-light">
+    <img class="activator" src="#" alt="hello"/>
+     <Thumbnail src={thumbnail} />
+  </div> */}
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">{items.title}<i class="material-icons right">more_vert</i></span>
+          <p>{items.place} </p>
+          <p>{items.address}</p>
+          <p>{items.location}</p>
+          <AddBtn onClick={() => this.add(items.id)}/>
+          {/* <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={this.add}><i class="material-icons">add</i></a> */}
+    <p><a rel="noreferrer noopener" target="_blank" href={items.url}>Click Here for more information.</a></p>
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
+    <p>{items.description}</p>
+  </div>
+  </div>
+    
       )
     })}
-      </CardList>
+   </div>
+    </div>
+    </div> 
       ) : (
        <h3 className="notes"> No Events to Display. </h3>
      )}
-  </div>
-  </div>
+ 
+  
 </div>
    
       

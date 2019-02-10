@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const todo = require("./routes/api/todo");
 const users = require("./routes/api/users");
+const events = require("./routes/api/save-event");
 const fetch = require('node-fetch');
 require('dotenv').config();
 // mongoose.plugin(schema => { schema.options.usePushEach = true });
@@ -43,6 +44,7 @@ require("./config/passport")(passport);
 
 app.use("/api/users", users);
 app.use("/api/todo", todo);
+app.use("/api/save-event", events)
 
 // catch 404
 app.use((req, res, next) => {

@@ -17,6 +17,10 @@ export default {
   saveTodo: function(bookData) {
     return axios.post("/api/todo", bookData);
   },
+  // Saves an event to the database
+  saveEvent: function(eventData) {
+    return axios.post("/api/save-event", eventData);
+  },
    // Updates a todo to the database
    updateTodo: function(id) {
     return axios.put("/api/todo/" + id);
