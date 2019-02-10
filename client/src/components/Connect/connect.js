@@ -36,21 +36,47 @@ const item = this.state.data.find(item => item.id === id);
         city: item.city,
         region: item.region,
         saved: true
-      }).then(() => this.notify());
+      }).then(res => {
+        console.log(res.data)
+          this.notify();
+      })
+      .catch(err => {
+      console.log(err)
+        this.notify2();
+      })
     
 }
 
+
 notify = () => {
-  toast("Event Saved!", {
+  toast("Success: Event Saved!", {
   position: "top-center",
   autoClose: 5000,
   closeOnClick: true,
   draggable: true,
   className: css({
-    background: 'black'
+    background: 'green'
   }),
   bodyClassName: css({
-    fontSize: '60px'
+    fontSize: '20px'
+  }),
+  progressClassName: css({
+    background: "repeating-radial-gradient(circle at center, red 0, blue, green 30px)"
+  })
+  })
+}
+
+notify2 = () => {
+  toast("Sorry you have already saved this event.", {
+  position: "top-center",
+  autoClose: 5000,
+  closeOnClick: true,
+  draggable: true,
+  className: css({
+    background: 'red'
+  }),
+  bodyClassName: css({
+    fontSize: '20px'
   }),
   progressClassName: css({
     background: "repeating-radial-gradient(circle at center, red 0, blue, green 30px)"
