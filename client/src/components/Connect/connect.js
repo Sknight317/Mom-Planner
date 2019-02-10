@@ -10,6 +10,9 @@ import { CardList, CardListItem} from "../../components/Card"
 // import Slider from "../slider/index";
 import AddBtn from "../AddBtn";
 import API from "../utils/API";
+import {ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { css } from 'glamor'
 class Connect extends Component {
   state ={
     data: [],
@@ -33,11 +36,33 @@ const item = this.state.data.find(item => item.id === id);
         city: item.city,
         region: item.region,
         saved: true
-      })
+      }).then(() => this.notify());
+    
 }
-  
-  getEvents=event=> {
-    event.preventDefault();
+
+notify = () => {
+  toast("Event Saved!", {
+  position: "top-center",
+  autoClose: 5000,
+  closeOnClick: true,
+  draggable: true,
+  className: css({
+    background: 'black'
+  }),
+  bodyClassName: css({
+    fontSize: '60px'
+  }),
+  progressClassName: css({
+    background: "repeating-radial-gradient(circle at center, red 0, blue, green 30px)"
+  })
+  })
+}
+search =event=> {
+  event.preventDefault()
+  this.getEvents()
+}
+  getEvents=()=> {
+    
     alert("clicked")
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     let where = document.getElementById("where").value;
@@ -170,6 +195,7 @@ return (
   
       <div className="container l12">
       <Navbar />
+      <ToastContainer />
         <div className="row">
           <div className="col s12 m12 l12 center-align">
           
@@ -195,7 +221,7 @@ return (
                 letterSpacing: "1.5px",
                 marginTop: "1rem"
               }}
-              onClick={this.getEvents}
+              onClick={this.search}
               className="waves-effect waves-light btn"
             >
               Search
@@ -212,9 +238,9 @@ return (
          const city = items.city;
          const region = items.region;
          const location = city + ", "+ region; 
-        //  const pic = items.image.url;
+        //  const = items.image.url;
       return ( 
-        
+       
   <div class="card small" key={items.id} >
   {/* <div class="card-image waves-effect waves-block waves-light">
     <img class="activator" src="#" alt="hello"/>
@@ -228,6 +254,7 @@ return (
           <AddBtn onClick={() => this.add(items.id)}/>
           {/* <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={this.add}><i class="material-icons">add</i></a> */}
     <p><a rel="noreferrer noopener" target="_blank" href={items.url}>Click Here for more information.</a></p>
+   
   </div>
   <div class="card-reveal">
     <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
