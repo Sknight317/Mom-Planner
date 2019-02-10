@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Fahkwang|Montserrat");
 .grocery {
    /* background-color: yellow; */
-   background-image: url("../../images/pexels-photo-97076.jpeg");
+   background-image: url("../../images/steel.jpeg");
    width: 85% !important;
    margin: 0 auto !important;
    text-align: center;
@@ -48,7 +48,7 @@
   flex-wrap: wrap;
 }
 #background {
-  background-image: url("../../images/white-background.jpeg");
+  background-image: url("../../images/wall-background.jpeg");
  
 }
 .container{

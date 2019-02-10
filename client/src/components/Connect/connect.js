@@ -2,17 +2,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-// import Navbarlogin from "../layout/NavbarLogin";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
 import style from "./style.css";
-import { CardList, CardListItem} from "../../components/Card"
-// import Slider from "../slider/index";
+// import { CardList, CardListItem} from "../../components/Card";
 import AddBtn from "../AddBtn";
 import API from "../utils/API";
 import {ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { css } from 'glamor'
+import { css } from 'glamor';
+import ZipInput from "../ZipInput";
 class Connect extends Component {
   state ={
     data: [],
@@ -44,9 +43,7 @@ const item = this.state.data.find(item => item.id === id);
       console.log(err)
         this.notify2();
       })
-    
 }
-
 
 notify = () => {
   toast("Success: Event Saved!", {
@@ -61,7 +58,7 @@ notify = () => {
     fontSize: '20px'
   }),
   progressClassName: css({
-    background: "repeating-radial-gradient(circle at center, red 0, blue, green 30px)"
+    background: "repeating-radial-gradient(circle at center, white, green 30px)"
   })
   })
 }
@@ -79,7 +76,25 @@ notify2 = () => {
     fontSize: '20px'
   }),
   progressClassName: css({
-    background: "repeating-radial-gradient(circle at center, red 0, blue, green 30px)"
+    background: "repeating-radial-gradient(circle at center, red 0, white)"
+  })
+  })
+}
+notify3 = () => {
+  toast("Please enter a valid zip code.", {
+  position: "top-center",
+  autoClose: 5000,
+  closeOnClick: true,
+  draggable: true,
+  className: css({
+    background: 'blue'
+  }),
+  bodyClassName: css({
+    fontSize: '20px',
+    fontColor: 'black'
+  }),
+  progressClassName: css({
+    background: "repeating-radial-gradient(circle at center, white 0, blue)"
   })
   })
 }
@@ -87,11 +102,19 @@ search =event=> {
   event.preventDefault()
   this.getEvents()
 }
+checkZip=(where) => {
+    return (/(^\d{5}$)|(^\d{5}-\d{4}$)/).test(where);
+    } 
+
   getEvents=()=> {
     
     alert("clicked")
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     let where = document.getElementById("where").value;
+    if (!this.checkZip(where)) {
+    return this.notify3()
+  } else {
+    console.log(where)
     axios.get(proxyurl + "http://api.eventful.com/json/events/search?app_key=8fh9T8QtjLVjwLvP&where=" + where + "&page_size=25")
         .then(result=> {
             console.log(result)
@@ -119,7 +142,7 @@ search =event=> {
             console.log(this.state.data)
             // this.ConverData()
         });
-       
+      } 
   }
   
   // ConverData = () => {
@@ -206,24 +229,13 @@ search =event=> {
 
 render() {
     const { user } = this.props.auth;
-    // const Items = this.state.data.map((item) =>
-    //     <p key={item.id}>{item.title}</p>
-    //     <p>{item.description}</p> 
-    //     <p key={item.id}>{item.city}</p> 
-    //     <p key={item.id}>{item.region}</p> 
-    //     <p key={item.id}>{item.start}</p> 
-    //     <p key={item.id}>{item.end}</p> 
-    //     <p key={item.id}>{item.address}</p> 
-    //     <p key={item.id}>{item.place}</p> 
-    //     <p key={item.id}>{item.url}</p>  
-    // );
 return (
   
-      <div className="container l12">
+      <div className="container l12" id="main">
       <Navbar />
       <ToastContainer />
         <div className="row">
-          <div className="col s12 m12 l12 center-align">
+          <div className="col s12 m12 l12 center-align pic">
           
             <h4 className="heading">
              
@@ -233,40 +245,45 @@ return (
              
             </h4>
        </div>
-       </div>     
-      <form class="col s12 search">
-        <div class="row">
-          <div class="input-field col s6">
-            <input placeholder="Type your zip code" id="where" type="text" class="validate" />
-            <label for="zip_code"></label>
+       </div>
+           <div class="row">  
+      <div class="col s12 m12 l12 search center-align">
+          {/* <div class="input-field col s6"> */}
+            {/* <input placeholder="Type your zip code" id="where" type="text" class="validate" />
+            <label for="zip_code"></label> */}
+            <ZipInput
+            placeholder="Type your zip code"
+            type="text"
+            className="where">
+            </ZipInput>
+            <button
+              onClick={this.onLogoutClick}
+              className="waves-effect waves-light btn"
+            >
+              Logout
+            </button>
             <button
               id="submit-button"
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem"
-              }}
               onClick={this.search}
               className="waves-effect waves-light btn"
             >
               Search
             </button>
           </div>
+          {/* </div> */}
           </div>
-          </form>
     
         {this.state.data.length ? (
       <div className="container" id="contain">
-       <div className="row grid">
-        <div className="col s3 l4" id="column">
+      <div className="row grid">
        {this.state.data.map(items => {
          const city = items.city;
          const region = items.region;
          const location = city + ", "+ region; 
         //  const = items.image.url;
       return ( 
-       
+     
+    <div className="col s12 m6 l3" id="column">  
   <div class="card small" key={items.id} >
   {/* <div class="card-image waves-effect waves-block waves-light">
     <img class="activator" src="#" alt="hello"/>
@@ -287,12 +304,12 @@ return (
     <p>{items.description}</p>
   </div>
   </div>
+   </div>
     
       )
     })}
    </div>
-    </div>
-    </div> 
+     </div> 
       ) : (
        <h3 className="notes"> No Events to Display. </h3>
      )}

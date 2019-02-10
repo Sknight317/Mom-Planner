@@ -16,7 +16,9 @@ import DeleteBtn from "../../components/DeleteBtn";
 import UpdateBtn from "../../components/UpdateBtn";
 import moment from 'moment';
 import Navbar from "../../components/Navbar";
-
+import {ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { css } from 'glamor';
 class Calendar extends Component {
       state = {
       grocerynotes: [],
@@ -63,7 +65,7 @@ if(this.state.selectValue && this.state.text) {
     name: this.state.selectValue,
     todoText: this.state.text,
   })
-    .then(res => this.loadTodos())
+    .then(res => this.loadTodos(), this.notify())
     .catch(err => console.log(err));
     this.hideModal();
     this.setState({appendedGrocery: true})
@@ -129,7 +131,8 @@ loadTodos= ()=> {
 // Deletes a note from the database with a given id then reloads the note from the db
 deleteTodo = id => {
   API.deleteTodo(id)
-    .then(res => this.loadTodos())
+    .then(res => this.loadTodos(),
+    this.notify2())
     .catch(err => console.log(err));
 };
 
@@ -202,6 +205,41 @@ getcolor = ()=> {
       let newcolor = colorValues[Math.floor(Math.random() * colorValues.length)];
       return newcolor
     }
+
+    notify = () => {
+      toast("Success: Note Added!", {
+      position: "top-center",
+      autoClose: 5000,
+      closeOnClick: true,
+      draggable: true,
+      className: css({
+        background: 'green'
+      }),
+      bodyClassName: css({
+        fontSize: '20px'
+      }),
+      progressClassName: css({
+        background: "repeating-radial-gradient(circle at center, white, green 30px)"
+      })
+      })
+    }
+    notify2 = () => {
+      toast("Success: Note Deleted!", {
+      position: "top-center",
+      autoClose: 5000,
+      closeOnClick: true,
+      draggable: true,
+      className: css({
+        background: 'green'
+      }),
+      bodyClassName: css({
+        fontSize: '20px'
+      }),
+      progressClassName: css({
+        background: "repeating-radial-gradient(circle at center, white, green 30px)"
+      })
+      })
+    }
 render() {
     const show = this.state.show;
     if (show) {
@@ -218,7 +256,7 @@ return (
  
   <div className="container l12" id="background">  
   <Navbar/>
-      
+      <ToastContainer/>
       
         <div className="row">
           <div className="col s12 m12 l12 center-align">
@@ -279,10 +317,10 @@ return (
           
          {this.state.grocerynotes.map(note => {
            const date = note.CreatedAt;
-           const newDate = date.slice(0,10);
+           const newDate = date.slice(0,11);
            const year = newDate.slice(0,4);
-           const month = newDate.slice(6,7);
-           const day = newDate.slice(9,10);
+           const month = newDate.slice(5,7);
+           const day = newDate.slice(8,10);
           //  console.log(year)
            const daten = month + "/"+day+"/" +year;
            console.log(daten);

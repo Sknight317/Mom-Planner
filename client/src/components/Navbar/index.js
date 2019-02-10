@@ -16,7 +16,7 @@ import Menu from '@material-ui/core/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import EventIcon from '@material-ui/icons/Event';
 import MailIcon from '@material-ui/icons/Mail';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -147,21 +147,21 @@ class MenuAppBar extends React.Component {
         <div className={classes.list}>
         <List>
           
-            <ListItem button component={Link} to="/">
+            {/* <ListItem button component={Link} to="/">
              <ListItemIcon><HomeIcon/></ListItemIcon> 
               <ListItemText primary="Home" />
-            </ListItem>
-            <ListItem button component={Link} to="/calendar" >
-            <ListItemIcon> <NoteIcon /> </ListItemIcon> 
-              <ListItemText primary="Calendar" />
-            </ListItem>
-            <ListItem button component={Link} to="/dashboard" >
+            </ListItem> */}
+             <ListItem button component={Link} to="/dashboard" >
             <ListItemIcon> <DashboardIcon /> </ListItemIcon> 
               <ListItemText primary="Dashboard" />
             </ListItem>
+            <ListItem button component={Link} to="/calendar" >
+            <ListItemIcon> <NoteIcon /> </ListItemIcon> 
+              <ListItemText primary="Notes" />
+            </ListItem>
             <ListItem button component={Link} to="/connect" >
-            <ListItemIcon> <InboxIcon /> </ListItemIcon> 
-              <ListItemText primary="Connect" />
+            <ListItemIcon> <EventIcon /> </ListItemIcon> 
+              <ListItemText primary="Events" />
             </ListItem>
         </List>
         </div>

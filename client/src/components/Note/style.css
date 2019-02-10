@@ -1,22 +1,23 @@
 .note {
-    /* background-image: url("../../images/yellow.jpg"); */
-    background-color: #F988B7;
+    background-image: url("../../images/pink-paper.jpeg");
+    /* background-color: #F988B7; */
     min-height: 15em;
     width: 15em;
     padding: 0.5em;
     /* border: 1px solid rgb(138, 136, 136); */
     /* Firefox */
-  -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
-  /* Safari+Chrome */
-  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-  /* Opera */
-  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-  border-radius: 8px;
- float: right;
- margin: 0 2em 2em 2em;
-  /* -webkit-transform:rotate(-6deg);
-  -o-transform:rotate(-6deg);
-  -moz-transform:rotate(-6deg); */
+    -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+    /* Safari+Chrome */
+    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    /* Opera */
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    border-radius: 8px;
+    float: right;
+    margin: 0 2em 2em 2em;
+    overflow: hidden;
+    /* -webkit-transform:rotate(-6deg);
+    -o-transform:rotate(-6deg);
+    -moz-transform:rotate(-6deg); */
 }
 
 .words {
