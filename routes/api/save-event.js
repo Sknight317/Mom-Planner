@@ -13,6 +13,7 @@ router.route("/")
 // Matches with "/api/todo/:id"
 router
   .route("/:id")
+  // passport.authenticate("jwt", { session: false })
   .get(EventController.findById)
   .put(EventController.update)
   .delete(EventController.remove);

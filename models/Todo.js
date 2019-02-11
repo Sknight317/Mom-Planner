@@ -5,6 +5,10 @@ const Schema = mongoose.Schema;
 
 // Using the Schema constructor, create a new UserSchema object
  const TodoSchema = new Schema({
+  userId: {
+    type: Schema.Types.ObjectId, //How we connect todos with specific user
+    ref: "users"
+  },
   CreatedAt: {
     type: Date,
     default: Date.now

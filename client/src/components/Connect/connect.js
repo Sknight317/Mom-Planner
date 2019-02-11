@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import ZipInput from "../ZipInput";
 import Logoutbtn from "../Logoutbtn";
+import moment from 'moment';
 class Connect extends Component {
   state ={
     data: [],
@@ -281,7 +282,13 @@ return (
          const city = items.city;
          const region = items.region;
          const location = city + ", "+ region; 
-        //  const = items.image.url;
+         const date = items.start;
+        //  const month = date.slice(5,7);
+        //  const year = date.slice(0,4);
+        //  const day = date.slice(8,11);
+        //  const newday = month + "/" + day + "/" + year;
+        // const niceDate =moment(newday).format("dddd, MMM Do");
+       
       return ( 
      
     <div className="col s12 m6 l3" id="column">  
@@ -291,11 +298,14 @@ return (
      <Thumbnail src={thumbnail} />
   </div> */}
   <div class="card-content">
-    <span class="card-title activator grey-text text-darken-4">{items.title}<i class="material-icons right">more_vert</i></span>
-          <p>{items.place} </p>
-          <p>{items.address}</p>
-          <p>{items.location}</p>
-          <AddBtn onClick={() => this.add(items.id)}/>
+    <span class="card-title activator grey-text text-darken-4">{items.title}<i class="material-icons right">expand_more</i></span>
+          <p className="item">{items.place} </p>
+          <p className="item">{items.address}</p>
+          <p className="item">{location}</p>
+          {/* <p>{niceDate}</p> */}
+          <Logoutbtn style={{size:"small"}} id="save-button" onClick={() => this.add(items.id)}>
+          Save
+          </Logoutbtn>
           {/* <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={this.add}><i class="material-icons">add</i></a> */}
     <p><a rel="noreferrer noopener" target="_blank" href={items.url}>Click Here for more information.</a></p>
    

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Comfortaa");
 .note {
     background-image: url("../../images/pink-paper.jpeg");
     /* background-color: #F988B7; */
@@ -22,8 +23,10 @@
 
 .words {
     /* font-family:'Give You Glory', cursive; */
-    font-family: 'Fahkwang', sans-serif;
+    font-family: 'Comfortaa', cursive !important;
+    /* font-family: 'Fahkwang', sans-serif; */
     font-size: 14px;
+    
 }
 .center {
   margin: 0 auto;

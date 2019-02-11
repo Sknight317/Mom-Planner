@@ -203,14 +203,6 @@ getBackground(i) {
 //   .catch(err => console.log(err));
 // }
 
-handleTextChange(e) {
-  if(e.keyCode != 13) return;
-  if(e.target.value == '') return;
-  if(e.target.value == '\n') {
-    e.target.value = '';
-    return;
-  }
-}
 getcolor = ()=> {
       let colorValues = ['#F988B7', '#76D7D6', '#ABE3E5', '#F6E7A3','#F8C5DO'];
       let newcolor = colorValues[Math.floor(Math.random() * colorValues.length)];
@@ -321,7 +313,7 @@ return (
         
       {this.state.grocerynotes.length ? (
         
-         <div className="col s6 m6 l6">
+         <div className="col s6 m6 l6" id="left">
          <div className="note-box">
           <h4 className="notes" id="note-title">My Notes</h4>
           </div>
@@ -335,7 +327,7 @@ return (
           //  console.log(year)
            const daten = month + "/"+day+"/" +year;
            console.log(daten);
-          //  const niceDate =moment(daten).format("dddd, MMMM M, YYYY");
+           const niceDate =moment(daten).format(" MMM Do, YYYY");
            
       return (
        
@@ -348,7 +340,7 @@ return (
         
         <p className="text-title">{note.name }</p>
         <p className="text">{note.todoText}</p>
-        <p className="text">Created: {daten}</p>
+        <p className="text">Created: {niceDate}</p>
         <div className="row">
         <div className="col s4 m8 l9 center">
         <DeleteBtn onClick={() => this.deleteTodo(note._id)} />
@@ -368,12 +360,22 @@ return (
      )}
 
    {this.state.events.length ? (
-  <div className="col s6 m6 l6" id="left">
+  <div className="col s6 m6 l6" id="right">
     <div className="note-box">
+    
           <h4 className="notes" id="event-title">My Saved Events</h4>
           </div>
 
          {this.state.events.map(items => {
+            const city = items.city;
+            const region = items.region;
+            const location = city + ", "+ region; 
+          //   const date = items.start;
+          //   const month = date.slice(5,7);
+          //   const year = date.slice(0,4);
+          //   const day = date.slice(8,11);
+          //   const newday = month + "/" + day + "/" + year;
+          //  const niceDate =moment(newday).format("dddd, MMM Do");
            return (
             <div className="col s12 m6 l3" id="column">  
             <div class="card small" key={items.id} >
@@ -382,11 +384,12 @@ return (
                <Thumbnail src={thumbnail} />
             </div> */}
             <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">{items.title}<i class="material-icons right">more_vert</i></span>
-                    <p>{items.place} </p>
-                    <p>{items.address}</p>
-                    <p>{items.location}</p>
-                    <AddBtn onClick={() => this.add(items.id)}/>
+              <span class="card-title activator grey-text text-darken-4">{items.title}<i class="material-icons right">expand_more</i></span>
+                    <p className="item">{items.place} </p>
+                    <p className="item">{items.address}</p>
+                    <p className="item">{location}</p>
+                    {/* <p>{niceDate}</p> */}
+                    {/* <button onClick={() => this.add(items.id)}/> */}
                     {/* <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={this.add}><i class="material-icons">add</i></a> */}
               <p><a rel="noreferrer noopener" target="_blank" href={items.url}>Click Here for more information.</a></p>
              
