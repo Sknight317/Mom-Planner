@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Navbar from "../../components/Navbar";
 import Slider from "../slider/index";
+import LogoutBtn from "../Logoutbtn";
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -25,18 +26,12 @@ return (
                 Welcome to Mom Planner!
               </p>
             </h4>
-            <button
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem"
-              }}
+            <LogoutBtn
               onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              // className="btn btn-large waves-effect waves-light hoverable blue accent-3"
             >
               Logout
-            </button>
+            </LogoutBtn>
           </div>
           
           </div>

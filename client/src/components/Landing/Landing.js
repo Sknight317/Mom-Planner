@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom"; 
 import ButtonAppBar from "../NavbarDashboard/Navbar";
-import Button from "../Button/button";
+import Logoutbtn from "../Logoutbtn";
 import style from "./style.css"
 
 // const divStyle = {
@@ -29,9 +29,18 @@ class Landing extends Component {
             </p>
             <br />
             <div className="col  l12 center-align">
-            <Button className="button-center"> <Link to="/register" />
+            <Logoutbtn>
+            <Link to="/register"
+            style={{width: "150px",
+                  height: '40px', 
+                  fontWeight: '600', 
+                  fontSize: '1rem', 
+                  letterSpacing: "1.5px",
+                  textAlign: 'center',
+                  color: 'white'}}>
                 Register
-            </Button >
+                </Link>
+            </Logoutbtn>
             </div>
             {/* <div className="col s6">
               <Link

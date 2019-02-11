@@ -12,6 +12,7 @@ import {ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import ZipInput from "../ZipInput";
+import Logoutbtn from "../Logoutbtn";
 class Connect extends Component {
   state ={
     data: [],
@@ -256,19 +257,19 @@ return (
             type="text"
             className="where">
             </ZipInput>
-            <button
+            <Logoutbtn
               onClick={this.onLogoutClick}
-              className="waves-effect waves-light btn"
+              // className="waves-effect waves-light btn"
             >
               Logout
-            </button>
-            <button
+            </Logoutbtn>
+            <Logoutbtn
               id="submit-button"
               onClick={this.search}
-              className="waves-effect waves-light btn"
+              // className="waves-effect waves-light btn"
             >
               Search
-            </button>
+            </Logoutbtn>
           </div>
           {/* </div> */}
           </div>

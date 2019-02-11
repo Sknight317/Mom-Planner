@@ -19,6 +19,7 @@ import Navbar from "../../components/Navbar";
 import {ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
+import LogoutBtn from "../Logoutbtn";
 class Calendar extends Component {
       state = {
       grocerynotes: [],
@@ -267,15 +268,15 @@ return (
                 Stay organized and plan out your week! Click the add a new note button to get started. You have {number} notes!
               </p>
             </h4>
-            <button
+            <LogoutBtn
               onClick={this.onLogoutClick}
-              className="waves-effect waves-light btn"
+              // className="waves-effect waves-light btn"
             >
               Logout
-            </button>
-            <ShowmodalBtn className="waves-effect waves-light btn" onClick={this.showModal}>
+            </LogoutBtn>
+            <LogoutBtn  onClick={this.showModal}>
             Add a Note
-            </ShowmodalBtn>
+            </LogoutBtn>
           </div>
           
           </div> 
