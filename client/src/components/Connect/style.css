@@ -62,9 +62,9 @@ button {
 }
  .pic {
     /* width: 80%; */
-    background-color: white;
+    /* background-color: white; */
     margin: 0 auto;
-    border-radius: 8px;
+    /* border-radius: 8px; */
  }
  #main {
     background-image: url("../../images/white-background.jpeg");

@@ -31,6 +31,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import style from  "./style.css";
+import Logoutbtn from "../Logoutbtn";
 
 const font = 'Orbitron, sans-serif';
 const styles = {
@@ -163,6 +164,8 @@ class MenuAppBar extends React.Component {
             <ListItemIcon> <EventIcon /> </ListItemIcon> 
               <ListItemText primary="Events" />
             </ListItem>
+          
+          
         </List>
         </div>
         </Drawer>

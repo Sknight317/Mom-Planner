@@ -5,6 +5,10 @@ export default {
   getTodos: function() {
     return axios.get("/api/todo");
   },
+  //Get all events
+  getEvents: function() {
+    return axios.get("/api/save-event");
+  },
   // Gets the todo with the given id
   getTodo: function(id) {
     return axios.get("/api/todo/" + id);

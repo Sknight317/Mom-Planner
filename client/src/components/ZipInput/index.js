@@ -11,8 +11,8 @@ import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
   },
   margin: {
     margin: theme.spacing.unit,
@@ -83,7 +83,7 @@ function CustomizedInputs(props) {
   const { classes } = props;
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root}  >
       {/* <FormControl className={classes.margin}>
         <InputLabel
           htmlFor="custom-css-standard-input"

@@ -20,12 +20,13 @@ import {ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import LogoutBtn from "../Logoutbtn";
+import AddBtn from "../AddBtn";
 class Calendar extends Component {
       state = {
       grocerynotes: [],
+      events: [],
       selectValue: "",
       text: "",
-      appointmentnotes: [],
       message: "",
       show: false,
       showMenu: false,
@@ -41,6 +42,7 @@ class Calendar extends Component {
   };
 componentDidMount() {
     this.loadTodos();
+    this.loadEvents();
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
   
@@ -129,6 +131,14 @@ loadTodos= ()=> {
       this.getColors();
 }
 
+loadEvents =()=> {
+  API.getEvents()
+    .then(res => {
+    console.log(res)
+    this.setState({events: res.data})
+})
+.catch(err => console.log(err));
+}
 // Deletes a note from the database with a given id then reloads the note from the db
 deleteTodo = id => {
   API.deleteTodo(id)
@@ -307,13 +317,13 @@ return (
       </Modal>
       <div className="row">
       
-          <div className="col s12 m12 l12 grocery align-center"> 
+          <div className="col s12 m12 l12 grocery align-center"></div>
         
       {this.state.grocerynotes.length ? (
         
-         <div >
+         <div className="col s6 m6 l6">
          <div className="note-box">
-          <h4 className="notes">My Notes</h4>
+          <h4 className="notes" id="note-title">My Notes</h4>
           </div>
           
          {this.state.grocerynotes.map(note => {
@@ -349,15 +359,56 @@ return (
       //  </ListItem>
       //   </List>
      
-       
+      
       )
     })}
      </div>
       ) : (
        <h3 className="notes"> No Notes Yet. </h3>
      )}
+
+   {this.state.events.length ? (
+  <div className="col s6 m6 l6" id="left">
+    <div className="note-box">
+          <h4 className="notes" id="event-title">My Saved Events</h4>
+          </div>
+
+         {this.state.events.map(items => {
+           return (
+            <div className="col s12 m6 l3" id="column">  
+            <div class="card small" key={items.id} >
+            {/* <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="#" alt="hello"/>
+               <Thumbnail src={thumbnail} />
+            </div> */}
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">{items.title}<i class="material-icons right">more_vert</i></span>
+                    <p>{items.place} </p>
+                    <p>{items.address}</p>
+                    <p>{items.location}</p>
+                    <AddBtn onClick={() => this.add(items.id)}/>
+                    {/* <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={this.add}><i class="material-icons">add</i></a> */}
+              <p><a rel="noreferrer noopener" target="_blank" href={items.url}>Click Here for more information.</a></p>
+             
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
+              <p>{items.description}</p>
+            </div>
+            </div>
+             </div>
+              
+                )
+              })}
+             </div>
+               
+                ) : (
+                 <h3 className="notes"> No Events to Display. </h3>
+               )}
+    
   </div>
-  </div>
+  
+  
        
         </div>
         

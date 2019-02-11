@@ -15,15 +15,15 @@ render() {
 return (
   <div>
   <Navbar />
-      <div className="container valign-wrapper">
+      <div className="container valign-wrapper" id="dashboard">
       
         <div className="row">
-          <div className="col l12 center-align">
+          <div className="col s12 m12 l12 center-align">
           
-            <h4>
-              <b>Hey,</b> {user.name.split(" ")[0]}
+            <h4 className="heading">
+              <p><b>Hey,</b> {user.name.split(" ")[0]} !!</p>
               <p className="flow-text grey-text text-darken-1">
-                Welcome to Mom Planner!
+                Welcome to Note-Plan it!
               </p>
             </h4>
             <LogoutBtn
@@ -39,9 +39,11 @@ return (
        
           
       </div>
-      <div className="container valign-wrapper">
-       <Slider />
-      </div>
+      <div className="row">
+          <div className="col s12 m12 l12 center-align">
+          
+          </div>
+          </div>
       </div>
       
     );

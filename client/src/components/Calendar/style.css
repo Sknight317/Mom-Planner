@@ -3,7 +3,7 @@
 .grocery {
    /* background-color: yellow; */
    background-image: url("../../images/steel.jpeg");
-   width: 85% !important;
+   width: 99% !important;
    margin: 0 auto !important;
    text-align: center;
    display: block !important;
@@ -11,9 +11,9 @@
    overflow: auto;
    
 }
-.row, .col {
+/* .row, .col {
   float: none !important;
-}
+} */
 .center {
  text-align: center;
 }
@@ -57,7 +57,9 @@
 }
 div.note-box {
   width: 80%;
-  background-color: white;
+  background-color: black;
+  color: white;
+  font-family: 'Orbitron', sans-serif !important;
   margin: 0 auto;
   /* display: -webkit-flex;
   flex-direction: row;
@@ -101,3 +103,15 @@ div.note-box {
   margin: 0px 30px;
   border-radius: 8px;
 } */
+#note-title {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 1.75rem;
+}
+#event-title {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 1.75rem;
+}
+#left {
+  float: left;
+  background-color: aliceblue;
+}

@@ -24,7 +24,7 @@ class Connect extends Component {
   };
 
 add = id => {
-  alert("button clicked");
+  // alert("button clicked");
 const item = this.state.data.find(item => item.id === id);
    API.saveEvent({
         id: item.id,
@@ -109,7 +109,7 @@ checkZip=(where) => {
 
   getEvents=()=> {
     
-    alert("clicked")
+    // alert("clicked")
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     let where = document.getElementById("where").value;
     if (!this.checkZip(where)) {
