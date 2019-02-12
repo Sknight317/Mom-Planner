@@ -26,7 +26,7 @@ class Calendar extends Component {
       grocerynotes: [],
       events: [],
       selectValue: "",
-      text: "",
+      todotext: "",
       message: "",
       show: false,
       showMenu: false,
@@ -61,14 +61,16 @@ hideModal = () => {
 
 addNewNote = event => {
 event.preventDefault()
-alert("add button clicked");
+// alert("add button clicked");
 // this.getRandomColor()
-if(this.state.selectValue && this.state.text) {
+if(this.state.selectValue && this.state.todotext) {
+  // const { user } = this.props.auth;
  API.saveTodo({
     name: this.state.selectValue,
-    todoText: this.state.text,
+    todoText: this.state.todotext,
+    // Userid: this.user
   })
-    .then(res => this.loadTodos(), this.notify())
+    .then(res => console.log(res), this.loadTodos(), this.notify())
     .catch(err => console.log(err));
     this.hideModal();
     this.setState({appendedGrocery: true})
@@ -128,7 +130,7 @@ loadTodos= ()=> {
       this.setState({ grocerynotes: res.data})
       })
       .catch(err => console.log(err));
-      this.getColors();
+      // this.getColors();
 }
 
 loadEvents =()=> {
@@ -262,11 +264,11 @@ return (
       <ToastContainer/>
       
         <div className="row">
-          <div className="col s12 m12 l12 center-align">
+          <div className="col s12 m12 l12 center-align" id="board2">
           
-          <h4 className="heading">
-              Hey, {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1 ">
+          <h4 className="heading2">
+              <p id="name-calendar" className="white2"><b>Hey, {user.name.split(" ")[0]} !</b></p>
+              <p className="white2">
                 Stay organized and plan out your week! Click the add a new note button to get started. You have {number} notes!
               </p>
             </h4>
@@ -298,11 +300,11 @@ return (
   
     {/* <div> */}
           <label data-error="wrong" data-success="right" for="form8">Your Note</label>
-          <textarea value={this.state.text} name="text" onChange={this.handleInputChange}  rows="4" id="user-message"class="form-control" placeholder="Enter your Message"></textarea>
+          <textarea value={this.state.todotext} name="todotext" onChange={this.handleInputChange}  rows="4" id="user-message"class="form-control" placeholder="Enter your Message"></textarea>
           
     {/* </div> */}
     <AddNewNote className="waves-effect waves-light btn" 
-    disabled={!(this.state.text && this.state.selectValue)} onClick={this.addNewNote}>
+    disabled={!(this.state.todotext && this.state.selectValue)} onClick={this.addNewNote}>
     </AddNewNote >
     {/* <label>Materialize Select</label> */}
   {/* </div> */}
@@ -343,8 +345,8 @@ return (
         <p className="text">Created: {niceDate}</p>
         <div className="row">
         <div className="col s4 m8 l9 center">
-        <DeleteBtn onClick={() => this.deleteTodo(note._id)} />
-        <UpdateBtn onclick={() => this.editTodo(note._id)} />
+        <DeleteBtn style={{margin: '0 auto'}} onClick={() => this.deleteTodo(note._id)} />
+        {/* <UpdateBtn onclick={() => this.editTodo(note._id)} /> */}
         </div>
         </div>
         </Note>
@@ -391,7 +393,7 @@ return (
                     {/* <p>{niceDate}</p> */}
                     {/* <button onClick={() => this.add(items.id)}/> */}
                     {/* <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={this.add}><i class="material-icons">add</i></a> */}
-              <p><a rel="noreferrer noopener" target="_blank" href={items.url}>Click Here for more information.</a></p>
+              <p><a rel="noreferrer noopener" target="_blank" href={items.url} style={{textDecoration:'underline', color: '#413639'}}>Read more.</a></p>
              
             </div>
             <div class="card-reveal">

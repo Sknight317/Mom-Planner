@@ -34,6 +34,8 @@ import style from  "./style.css";
 import Logoutbtn from "../Logoutbtn";
 
 const font = 'Orbitron, sans-serif';
+
+const font2 = 'Comfortaa, cursive';
 const styles = {
   root: {
     flexGrow: 1,
@@ -98,7 +100,7 @@ class MenuAppBar extends React.Component {
               <MenuIcon style={{fill: 'white'}} />
               
             </IconButton>
-            <Typography style={{fontFamily: font, fontSize: 30, color: 'white'}} variant="h6" className={classes.grow}>
+            <Typography style={{fontFamily: font2, fontSize: 30, color: 'white'}} variant="h6" className={classes.grow}>
             Note Plan-It
             </Typography>
             {auth && (
@@ -148,10 +150,10 @@ class MenuAppBar extends React.Component {
         <div className={classes.list}>
         <List>
           
-            {/* <ListItem button component={Link} to="/">
+            <ListItem button component={Link} to="/">
              <ListItemIcon><HomeIcon/></ListItemIcon> 
               <ListItemText primary="Home" />
-            </ListItem> */}
+            </ListItem>
              <ListItem button component={Link} to="/dashboard" >
             <ListItemIcon> <DashboardIcon /> </ListItemIcon> 
               <ListItemText primary="Dashboard" />

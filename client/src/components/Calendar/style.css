@@ -59,7 +59,8 @@
     max-height: 100%;
     margin: auto;
     height: 100vh !important;
-    width: 100;
+    width: 100%;
+    height: 100%;
     background-size: cover;
 }
 .container{
@@ -68,9 +69,12 @@
 }
 div.note-box {
   width: 80%;
-  background-color: black;
-  color: white;
-  font-family: 'Orbitron', sans-serif !important;
+  background-color: white;
+  padding: none;
+  color: #757575;
+ 
+  /* font-family: 'Orbitron', sans-serif !important; */
+  font-family: 'Comfortaa', cursive !important;
   margin: 0 auto;
   /* display: -webkit-flex;
   flex-direction: row;
@@ -100,11 +104,11 @@ div.note-box {
   position:relative;
   top:-10px;
 } */
-.heading{
-  font-size: 1.68rem;
-  font-family: 'Fahkwang', sans-serif;
+.heading2 {
+  font-size: 14px;
+  font-family: 'Comfortaa', cursive !important;
   color: #757575 !important;
-  font-weight: 600
+  /* font-weight: 600 */
 }
 .waves-effect {
   margin: 5px;
@@ -115,12 +119,20 @@ div.note-box {
   border-radius: 8px;
 } */
 #note-title {
-  font-family: 'Orbitron', sans-serif !important;
+  /* font-family: 'Orbitron', sans-serif !important; */
+  font-family: 'Comfortaa', cursive !important;
   font-size: 1.75rem;
+  border: 2px solid  #ffd9e6;;
+  border-radius: 4px;
+  font-weight: bold;
 }
 #event-title {
-  font-family: 'Orbitron', sans-serif !important;
+  /* font-family: 'Orbitron', sans-serif !important; */
+  font-family: 'Comfortaa', cursive !important;
   font-size: 1.75rem;
+  border: 2px solid #ffd9e6;;
+  border-radius: 4px; 
+  font-weight: bold;
 }
 /* #left {
   float: left;
@@ -143,7 +155,7 @@ div.note-box {
   border-radius: 8px;
 }
 .card-title {
-  font-weight: bold !important;
+  font-weight: 100 !important;
   font-family: 'Comfortaa', cursive !important;
   font-size: 18px !important;
   line-height: 25px !important;
@@ -154,3 +166,32 @@ div.note-box {
 /* .form {
   display: inline !important;
 } */
+#name-calendar {
+  font-size: 25px;
+  text-align: center;
+}
+
+#board2 {
+  border-top: 10px solid #ffd9e6;
+  background-color: #413639;
+  width: 80% !important;
+  /* height: 100vh !important; */
+  /* margin: 0 auto !important; */
+  display: table;
+  text-align: center;
+  /* display: block !important; */
+  border-radius: 8px;
+  /* overflow: auto; */
+  padding: 20px;
+  margin: 0 auto;
+  /* color: white !important; */
+}
+.item {
+  background-color: #ffd9e6;
+  
+}
+.white2 {
+  background:white;
+  border-radius: 2px;
+  padding: 7px;
+}

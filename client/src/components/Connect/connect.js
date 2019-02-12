@@ -237,19 +237,19 @@ return (
       <Navbar />
       <ToastContainer />
         <div className="row">
-          <div className="col s12 m12 l12 center-align pic">
+          <div className="col s12 m12 l12 center-align pic" id="board3">
           
-            <h4 className="heading">
+            <h4 className="heading3">
              
-              <p className="flow-text grey-text text-darken-1">
+              <p className="white3">
                 Find local events near you! </p>
-                <p>Type in your zip code to get started.</p>
+                <p className="white3">Type in your zip code to get started.</p>
              
             </h4>
        </div>
        </div>
            <div class="row">  
-      <div class="col s12 m12 l12 search center-align">
+      <div class="col s12 m12 l12 search center-align" id="zip">
           {/* <div class="input-field col s6"> */}
             {/* <input placeholder="Type your zip code" id="where" type="text" class="validate" />
             <label for="zip_code"></label> */}
@@ -307,7 +307,7 @@ return (
           Save
           </Logoutbtn>
           {/* <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={this.add}><i class="material-icons">add</i></a> */}
-    <p><a rel="noreferrer noopener" target="_blank" href={items.url}>Click Here for more information.</a></p>
+    <p><a rel="noreferrer noopener" target="_blank" href={items.url} style={{color: '#413639', textDecoration: 'underline'}}>Read more.</a></p>
    
   </div>
   <div class="card-reveal">

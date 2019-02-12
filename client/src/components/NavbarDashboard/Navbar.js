@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import Navcss from "./style.css";
 
 const font = 'Orbitron, sans-serif';
-
+const font2 = 'Comfortaa, cursive';
 const styles = {
   root: {
     flexGrow: 1,
@@ -37,7 +37,7 @@ function ButtonAppBar(props) {
       <AppBar className="bar" position="static" style={{ background: 'black'}}>
         <Toolbar>
       
-          <Typography style={{fontFamily: font, fontSize: 30, color: 'white', textAlign: 'center'}}>
+          <Typography style={{fontFamily: font2, fontSize: 30, color: 'white', textAlign: 'center'}}>
             Note Plan-It
           </Typography>
           <div style={{float: 'right'}}>

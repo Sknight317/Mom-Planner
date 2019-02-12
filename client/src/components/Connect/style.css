@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Orbitron|Pacifico|Rajdhani");
 @import url("https://fonts.googleapis.com/css?family=Fahkwang|Montserrat");
 @import url("https://fonts.googleapis.com/css?family=Comfortaa");
-.heading {
-    font-size: 1.68rem;
-    font-family: 'Fahkwang', sans-serif;
+.heading3 {
+    font-size: 16px;
+    font-family: 'Comfortaa', cursive !important;
     color: #757575 !important;
-    font-weight: 600   
+    /* font-weight: 600    */
 }
 .input-field {
     margin: 0 auto; 
@@ -24,17 +24,18 @@ button {
     flex-wrap: wrap;
     align-content: flex-start; 
     /* background-image: url("../../images/steel.jpeg"); */
+    border-top: 10px solid #ffd9e6;
     background-color: #413639;
     width: 100% !important;
-    height: 100vh !important;
+    /* height: 100vh !important; */
     margin: 0 auto !important;
     text-align: center;
     /* display: block !important; */
     border-radius: 8px;
-    overflow: auto;
+    /* overflow: auto; */
     padding: 20px;
   }
-  .row.grid #column {
+  .grid #column {
     flex: auto;
     flex: 0;
     flex: 1;
@@ -58,8 +59,21 @@ button {
     float: left;
     font-family: 'Comfortaa', cursive !important;
   }
+
+  .card:hover, .card:focus{
+    -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+    -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+    box-shadow:10px 10px 7px rgba(0,0,0,.7);
+    -webkit-transform: scale(1.25);
+    -moz-transform: scale(1.25);
+    -o-transform: scale(1.25);
+    position:relative;
+    z-index:5;
+  }
   #where {
       margin: 0 auto;
+      background: white;
+      border-radius: 3px;
   }
 #main {
     width: 100%;
@@ -73,14 +87,56 @@ button {
  }
  #main {
     background-image: url("../../images/white-background.jpeg");
+    /* height: 100vh !important; */
+    background-repeat: repeat;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
     height: 100vh !important;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
   }
 .card-title {
-    font-weight: bold !important;
+    /* font-weight: bold !important; */
     font-family: 'Comfortaa', cursive !important;
     font-size: 18px !important;
     line-height: 25px !important;
+    background-color: #413639;
+    border-radius: 6px !important;
+    color: white !important;
+    padding: 3px;
+}
+.grey-text.text-darken-4 {
+    color: white !important;
 }
 .item {
     font-size: 12px !important;
+}
+.white3 {
+    background:white;
+    border-radius: 2px;
+    padding: 7px;
+}
+
+#board3, #zip {
+    border-top: 10px solid #ffd9e6;
+  background-color: #413639;
+  width: 80% !important;
+  /* height: 100vh !important; */
+  /* margin: 0 auto !important; */
+  display: table;
+  text-align: center;
+  /* display: block !important; */
+  border-radius: 8px;
+  /* overflow: auto; */
+  padding: 20px;
+  margin: 0 auto;
+  /* color: white !important; */
+}
+div.card {
+    /* transform: scale(1.3) rotate(3deg); */
+    border-corner-shape: bevel;
+    border-radius: 10%;
+    background: rgb(241, 241, 241);
 }

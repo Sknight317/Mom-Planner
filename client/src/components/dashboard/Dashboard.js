@@ -5,6 +5,7 @@ import { logoutUser } from "../../actions/authActions";
 import Navbar from "../../components/Navbar";
 import Slider from "../slider/index";
 import LogoutBtn from "../Logoutbtn";
+import style from "./style.css";
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -13,17 +14,24 @@ class Dashboard extends Component {
 render() {
     const { user } = this.props.auth;
 return (
-  <div>
-  <Navbar />
-      <div className="container valign-wrapper" id="dashboard">
-      
-        <div className="row">
-          <div className="col s12 m12 l12 center-align">
-          
-            <h4 className="heading">
-              <p><b>Hey,</b> {user.name.split(" ")[0]} !!</p>
-              <p className="flow-text grey-text text-darken-1">
-                Welcome to Note-Plan it!
+  
+      <div className="container l12" id="dashboard">
+      <Navbar />
+        <div className="row" id="center">
+          <div className="col s8 m8 l8 center-align" id="board">
+                
+            <h4 className="heading" >
+              <p className="white" id="name-top"><b>Hey, {user.name.split(" ")[0]} !</b></p>
+              <p className="white">
+                Welcome to Note-Plan it! Here you can stay organized by creating your own
+                personal to-do board. You can can create and add your own to-do notes to your board,
+                with several to-do categories to choose from.  
+              </p>
+              <p  className="white">
+              You can also search for events in your area and add any event you want to your personal board.
+              </p>
+               <p className="white" >
+              To get started, simply click on the navigation menu to the left.
               </p>
             </h4>
             <LogoutBtn
@@ -32,19 +40,18 @@ return (
             >
               Logout
             </LogoutBtn>
+            </div>
           </div>
-          
+          {/* <div className="row">
+          <div className="col s8 m8 l8 center-align" id="board">
+         
           </div>
+          </div> */}
             
        
           
       </div>
-      <div className="row">
-          <div className="col s12 m12 l12 center-align">
-          
-          </div>
-          </div>
-      </div>
+   
       
     );
   }

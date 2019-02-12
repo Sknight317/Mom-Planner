@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Orbitron|Pacifico|Rajdhani");
 @import url("https://fonts.googleapis.com/css?family=Fahkwang|Montserrat");
-
+@import url("https://fonts.googleapis.com/css?family=Comfortaa");
 .heading {
-    font-size: 1.68rem;
-    font-family: 'Fahkwang', sans-serif;
+    font-size: 14px;
+    /* font-family: 'Fahkwang', sans-serif; */
+    font-family: 'Comfortaa', cursive !important;
     color: #757575 !important;
-    font-weight: 600   
+    /* font-weight: 600    */
 }
 #dashboard {
     background-image: url("../../images/wall-background.jpeg");
@@ -13,7 +14,39 @@
       max-width: 100%;
       max-height: 100%;
       margin: auto;
+      height: 100% !important;
       height: 100vh !important;
-      width: 100;
+      width: 100%;
       background-size: cover;
+}
+div#board {
+    border-top: 10px solid #ffd9e6;
+    background-color: #413639;
+    width: 80% !important;
+    /* height: 100vh !important; */
+    /* margin: 0 auto !important; */
+    display: table;
+    text-align: center;
+    /* display: block !important; */
+    border-radius: 8px;
+    /* overflow: auto; */
+    padding: 20px;
+    margin: 0 auto;
+    /* color: white !important; */
+}
+.dash-text {
+    font-size: 1.15rem;
+    text-align: center;
+}
+.white {
+    background:white;
+    border-radius: 2px;
+    padding: 7px;
+}
+#name-top {
+    font-size: 25px;
+    font-weight: 500
+}
+#center {
+    margin: 0 auto;
 }
