@@ -2,25 +2,25 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import Navbarlogin from "../layout/NavbarLogin";
-import { List, ListItem } from "../ShoppingList/index";
+// import Navbarlogin from "../layout/NavbarLogin";
+// import { List, ListItem } from "../ShoppingList/index";
 import Modal from "../Modal";
-import ShowmodalBtn from "../ShowmodalBtn";
+// import ShowmodalBtn from "../ShowmodalBtn";
 import M from 'materialize-css';  
 import AddNewNote from "../../components/AddNewNote";
 import Note from "../../components/Note";
 import API from "../utils/API";
 import "./style.css";
-import axios from "axios";
+// import axios from "axios";
 import DeleteBtn from "../../components/DeleteBtn";
-import UpdateBtn from "../../components/UpdateBtn";
+// import UpdateBtn from "../../components/UpdateBtn";
 import moment from 'moment';
 import Navbar from "../../components/Navbar";
 import {ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import LogoutBtn from "../Logoutbtn";
-import AddBtn from "../AddBtn";
+// import AddBtn from "../AddBtn";
 class Calendar extends Component {
       state = {
       grocerynotes: [],
@@ -31,7 +31,7 @@ class Calendar extends Component {
       show: false,
       showMenu: false,
       appendedGrocery: false,
-      appendedAppointment: false,
+     
        
    
     };
@@ -119,10 +119,6 @@ handleChange = (e)=>{
   this.setState({ selectValue:e.target.value});
 }
 
-addtoGroceries =() => {
-  
-}
-
 loadTodos= ()=> {
   API.getTodos()
       .then(res => {
@@ -165,16 +161,16 @@ updateTodo = id => {
   }).then(res => this.loadTodos())
   .catch(err => console.log(err));
 }
-addtoAppointments =() => {
-  console.log("added to appointments!!");
-  this.hideModal();
-  this.setState({appendedAppointment: true});
-  API.saveTodo({
-    title: this.state.title,
-    // todoText: this.state.text
-  })
-  .catch(err => console.log(err));
-}
+// addtoAppointments =() => {
+//   console.log("added to appointments!!");
+//   this.hideModal();
+//   this.setState({appendedAppointment: true});
+//   API.saveTodo({
+//     title: this.state.title,
+//     // todoText: this.state.text
+//   })
+//   .catch(err => console.log(err));
+// }
 
 addtoTodo =()=>{
   alert("added to To do!!")
@@ -251,7 +247,7 @@ render() {
       
     }
     // const appendedGrocery = this.state.appendedGrocery;
-    const appendedAppointment = this.state.appendedAppointment;
+    // const appendedAppointment = this.state.appendedAppointment;
     const { user } = this.props.auth;
     const message='You selected '+this.state.selectValue + '.';
     const number  = this.state.grocerynotes.length;

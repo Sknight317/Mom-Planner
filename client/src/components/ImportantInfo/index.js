@@ -6,8 +6,8 @@ import Navbarlogin from "../layout/NavbarLogin";
 // import Slider from "../slider/index";
 import API from "../utils/API"
 import ShowPlacesBtn from "../ShowPlacesBtn";
-import $ from 'jquery';
-import axios from "axios";
+// import $ from 'jquery';
+// import axios from "axios";
 
 // const config = {
 //   headers: {'Authorization:' 'Bearer' process.env.YELP_API},
@@ -70,7 +70,7 @@ class Connect extends Component {
 
   
 render() {
-    const { user } = this.props.auth;
+    // const { user } = this.props.auth;
 return (
   <div>
   <Navbarlogin />

@@ -7,9 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
+// import Switch from '@material-ui/core/Switch';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
@@ -17,12 +17,12 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import EventIcon from '@material-ui/icons/Event';
-import MailIcon from '@material-ui/icons/Mail';
+// import MailIcon from '@material-ui/icons/Mail';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import Calendar from "../Calendar/calendar";
-import Connect from "../Connect/connect";
-import Dashboard from "../dashboard/Dashboard";
+// import Calendar from "../Calendar/calendar";
+// import Connect from "../Connect/connect";
+// import Dashboard from "../dashboard/Dashboard";
 
 import { Link } from "react-router-dom";
 import HomeIcon from '@material-ui/icons/Home';
@@ -31,9 +31,9 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import style from  "./style.css";
-import Logoutbtn from "../Logoutbtn";
+// import Logoutbtn from "../Logoutbtn";
 
-const font = 'Orbitron, sans-serif';
+// const font = 'Orbitron, sans-serif';
 
 const font2 = 'Comfortaa, cursive';
 const styles = {

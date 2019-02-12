@@ -6,14 +6,14 @@ import Navbar from "../../components/Navbar";
 import axios from "axios";
 import style from "./style.css";
 // import { CardList, CardListItem} from "../../components/Card";
-import AddBtn from "../AddBtn";
+// import AddBtn from "../AddBtn";
 import API from "../utils/API";
 import {ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import ZipInput from "../ZipInput";
 import Logoutbtn from "../Logoutbtn";
-import moment from 'moment';
+// import moment from 'moment';
 class Connect extends Component {
   state ={
     data: [],
@@ -230,7 +230,7 @@ checkZip=(where) => {
   // }
 
 render() {
-    const { user } = this.props.auth;
+    // const { user } = this.props.auth;
 return (
   
       <div className="container l12" id="main">
@@ -282,7 +282,7 @@ return (
          const city = items.city;
          const region = items.region;
          const location = city + ", "+ region; 
-         const date = items.start;
+        //  const date = items.start;
         //  const month = date.slice(5,7);
         //  const year = date.slice(0,4);
         //  const day = date.slice(8,11);
