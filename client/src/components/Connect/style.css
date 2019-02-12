@@ -86,7 +86,7 @@ button {
     /* border-radius: 8px; */
  }
  #main {
-    background-image: url("../../images/white-background.jpeg");
+    /* background-image: url("../../images/white-background.jpeg"); */
     /* height: 100vh !important; */
     background-repeat: repeat;
     max-width: 100%;
@@ -119,8 +119,8 @@ button {
     padding: 7px;
 }
 
-#board3, #zip {
-    border-top: 10px solid #ffd9e6;
+#board3  {
+  border-top: 10px solid #ffd9e6;
   background-color: #413639;
   width: 80% !important;
   /* height: 100vh !important; */
@@ -131,12 +131,32 @@ button {
   border-radius: 8px;
   /* overflow: auto; */
   padding: 20px;
-  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 35px;
   /* color: white !important; */
+}
+
+#zip {
+    border-top: 10px solid #ffd9e6;
+    background-color: #413639;
+    width: 80% !important;
+    /* height: 100vh !important; */
+    /* margin: 0 auto !important; */
+    display: table;
+    text-align: center;
+    /* display: block !important; */
+    border-radius: 8px;
+    /* overflow: auto; */
+    padding: 20px;
+    margin-bottom: 40px;
+    /* color: white !important; */
 }
 div.card {
     /* transform: scale(1.3) rotate(3deg); */
     border-corner-shape: bevel;
     border-radius: 10%;
     background: rgb(241, 241, 241);
+}
+body {
+    background-image: url("../../images/white-background.jpeg");
 }

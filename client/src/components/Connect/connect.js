@@ -236,8 +236,8 @@ return (
       <div className="container l12" id="main">
       <Navbar />
       <ToastContainer />
-        <div className="row">
-          <div className="col s12 m12 l12 center-align pic" id="board3">
+        <div className="row" id="board3">
+          <div className="col s12 m12 l12 center-align pic" >
           
             <h4 className="heading3">
              
@@ -248,8 +248,8 @@ return (
             </h4>
        </div>
        </div>
-           <div class="row">  
-      <div class="col s12 m12 l12 search center-align" id="zip">
+           <div class="row" id="zip">  
+      <div class="col s12 m12 l12 search center-align" >
           {/* <div class="input-field col s6"> */}
             {/* <input placeholder="Type your zip code" id="where" type="text" class="validate" />
             <label for="zip_code"></label> */}

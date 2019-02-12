@@ -52,6 +52,7 @@
   flex-direction: row;   
   flex-wrap: wrap;
 }
+
 #background {
   background-image: url("../../images/wall-background.jpeg");
   background-repeat: no-repeat;
@@ -64,8 +65,8 @@
     background-size: cover;
 }
 .container{
-  width: 100%;
-  max-width:initial;
+  /* width: 100%;
+  max-width:initial; */
 }
 div.note-box {
   width: 80%;
@@ -174,7 +175,7 @@ div.note-box {
 #board2 {
   border-top: 10px solid #ffd9e6;
   background-color: #413639;
-  width: 80% !important;
+  width: 70% !important;
   /* height: 100vh !important; */
   /* margin: 0 auto !important; */
   display: table;
@@ -183,7 +184,7 @@ div.note-box {
   border-radius: 8px;
   /* overflow: auto; */
   padding: 20px;
-  margin: 0 auto;
+  margin-top: 40px;
   /* color: white !important; */
 }
 .item {
@@ -194,4 +195,7 @@ div.note-box {
   background:white;
   border-radius: 2px;
   padding: 7px;
+}
+.container {
+ width: 100%; 
 }

@@ -19,7 +19,7 @@ class Landing extends Component {
         <div className="container" >
         
         <div className="row">
-          <div className="col s12 center-align" id="words">
+          <div className="col s2 m12 l12 center-align" id="words">
             
             <h4 className="text">
               Organize<b> All</b> of your to-do lists in one simple place!

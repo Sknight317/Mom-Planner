@@ -263,13 +263,13 @@ return (
   <Navbar/>
       <ToastContainer/>
       
-        <div className="row">
-          <div className="col s12 m12 l12 center-align" id="board2">
+        <div className="row" id="board2">
+          <div className="col l12" >
           
           <h4 className="heading2">
               <p id="name-calendar" className="white2"><b>Hey, {user.name.split(" ")[0]} !</b></p>
               <p className="white2">
-                Stay organized and plan out your week! Click the add a new note button to get started. You have {number} notes!
+                Stay organized and plan out your week! Click the add a new note button to get started. You have <b> {number} </b> notes!
               </p>
             </h4>
             <LogoutBtn

@@ -17,8 +17,8 @@ return (
   
       <div className="container l12" id="dashboard">
       <Navbar />
-        <div className="row" id="center">
-          <div className="col s8 m8 l8 center-align" id="board">
+        <div className="row" id="board">
+          <div className="col s8 m8 l8 center-align" >
                 
             <h4 className="heading" >
               <p className="white" id="name-top"><b>Hey, {user.name.split(" ")[0]} !</b></p>
@@ -40,6 +40,9 @@ return (
             >
               Logout
             </LogoutBtn>
+            </div>
+            <div className="col s4 m4 l4" id="picture-dash">
+            
             </div>
           </div>
           {/* <div className="row">
