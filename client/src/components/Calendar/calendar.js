@@ -376,11 +376,11 @@ return (
           //  const niceDate =moment(newday).format("dddd, MMM Do");
            return (
             <div className="col s12 m6 l3" id="column">  
-            <div class="card small" key={items.id} >
-            {/* <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="#" alt="hello"/>
-               <Thumbnail src={thumbnail} />
-            </div> */}
+            <div class="card medium" key={items.id} >
+            <div class="card-image waves-effect waves-block waves-light">
+            {items.image ? <img class="activator" src={items.imageUrl} alt="hello"/> : ""}
+               {/* <Thumbnail src={thumbnail} /> */}
+            </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4">{items.title}<i class="material-icons right">expand_more</i></span>
                     <p className="item">{items.place} </p>

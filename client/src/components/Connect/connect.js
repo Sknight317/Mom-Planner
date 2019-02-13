@@ -36,7 +36,8 @@ const item = this.state.data.find(item => item.id === id);
         description: item.description,
         city: item.city,
         region: item.region,
-        saved: true
+        saved: true,
+        imageUrl: item.image
       }).then(res => {
         console.log(res.data)
           this.notify();
@@ -133,7 +134,7 @@ checkZip=(where) => {
                 address: result.data.events.event[i].venue_address,
                 place: result.data.events.event[i].venue_name,
                 url: result.data.events.event[i].url,
-                image: result.data.events.event[i].image,
+                image: result.data.events.event[i].image ? result.data.events.event[i].image.medium.url : "",
                 id: result.data.events.event[i].id
               })
             
@@ -292,11 +293,13 @@ return (
       return ( 
      
     <div className="col s12 m6 l3" id="column">  
-  <div class="card small" key={items.id} >
-  {/* <div class="card-image waves-effect waves-block waves-light">
-    <img class="activator" src="#" alt="hello"/>
-     <Thumbnail src={thumbnail} />
-  </div> */}
+  <div class="card medium" key={items.id} >
+  <div class="card-image waves-effect waves-block waves-light">
+  {items.image ? <img class="activator" src={items.image} alt="hello"/> : ""}
+    
+  
+     {/* <Thumbnail src={thumbnail} /> */}
+  </div>
   <div class="card-content">
     <span class="card-title activator grey-text text-darken-4">{items.title}<i class="material-icons right">expand_more</i></span>
           <p className="item">{items.place} </p>

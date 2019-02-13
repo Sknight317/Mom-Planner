@@ -40,6 +40,17 @@ const Schema = mongoose.Schema;
     type: Boolean,
     default: false
   },
+  Userid: {
+    type: mongoose.Schema.Types.ObjectId, //How we connect events with specific user
+    ref: "User"
+},
+  CreatedAt: {
+  type: Date,
+  default: Date.now
+},
+imageUrl: { 
+  type: String
+}
  
 });
 
