@@ -28,9 +28,9 @@ import { Link } from "react-router-dom";
 import HomeIcon from '@material-ui/icons/Home';
 import NoteIcon from '@material-ui/icons/Note';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
-import style from  "./style.css";
+// import { connect } from "react-redux";
+// import { logoutUser } from "../../actions/authActions";
+// import style from  "./style.css";
 // import Logoutbtn from "../Logoutbtn";
 
 // const font = 'Orbitron, sans-serif';
@@ -57,12 +57,6 @@ class MenuAppBar extends React.Component {
     anchorEl: null,
     left: false,
   };
-  onLogoutClick = e => {
-    e.preventDefault();
-    this.props.logoutUser();
-    
-  };
-
   handleChange = event => {
     this.setState({ auth: event.target.checked });
   };
@@ -178,14 +172,14 @@ class MenuAppBar extends React.Component {
 
 MenuAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  // auth: PropTypes.object.isRequired
 };
-const mapStateToProps = state => ({
-  auth: state.auth
-});
+// const mapStateToProps = state => ({
+//   auth: state.auth
+// });
 export default withStyles(styles)(MenuAppBar);
-connect(
-  mapStateToProps,
-  { logoutUser }
-)(MenuAppBar);
+// connect(
+//   mapStateToProps,
+//   { logoutUser }
+// )(MenuAppBar);
 

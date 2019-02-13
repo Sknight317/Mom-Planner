@@ -106,7 +106,7 @@ button {
     border-radius: 6px !important;
     color: white !important;
     padding: 3px;
-    /* min-height: 100px; */
+    min-height: 100px;
 }
 .grey-text.text-darken-4 {
     color: white !important;
@@ -165,7 +165,7 @@ body {
 #save-btn {
     float: left;
 }
-#imag-div {
+#img-div {
     width: 128px;
     height: 128px;
     background-color: rgb(241, 241, 241);

@@ -17,6 +17,11 @@ export default {
   deleteTodo: function(id) {
     return axios.delete("/api/todo/" + id);
   },
+
+  // Deletes the todo with the given id
+  deleteEvent: function(id) {
+    return axios.delete("/api/save-event/" + id);
+  },
   // Saves a todo to the database
   saveTodo: function(bookData) {
     return axios.post("/api/todo", bookData);

@@ -199,12 +199,10 @@ div.note-box {
 .container {
  width: 100%; 
 }
-img#image.activator {
+/* img#image.activator {
   width: 200px;
   height: auto;
-  
-  /* position: absolute; */
-}
+} */
 div.card-image {
   position: relative;
   top: -30px;
@@ -222,9 +220,15 @@ div.card-content {
   top: -60px;
   border-radius: 50%;
 }
-
-#alternate {
+#delete {
+  float: left;
+}
+#img-div2 {
   width: 128px;
   height: 128px;
   background-color: rgb(241, 241, 241);
+}
+#pick {
+  color: #413639;
+  font-family: 'Comfortaa', cursive !important;
 }

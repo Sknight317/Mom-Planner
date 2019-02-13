@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Orbitron|Pacifico|Rajdhani");
 @import url("https://fonts.googleapis.com/css?family=Fahkwang|Montserrat");
+@import url("https://fonts.googleapis.com/css?family=Comfortaa");
 .modal {
   display: none;
     position: fixed;
@@ -28,7 +29,7 @@
   }
   
   .modal-header {
-    background-color: #26a69a;;
+    background-color: #413639;
     padding:16px 16px;
     color:#FFF;
     border-radius: 8px;
@@ -58,7 +59,11 @@
     width: 60%;
   }
 .modal-title {
-  font-family: 'Fahkwang', sans-serif;
+  font-family: 'Comfortaa', cursive !important;
   font-size: 20px;
   text-align: center;
+}
+#select-options {
+  font-family: 'Comfortaa', cursive !important;
+  color: #413639;
 }

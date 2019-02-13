@@ -41,6 +41,7 @@ const item = this.state.data.find(item => item.id === id);
       }).then(res => {
         console.log(res.data)
           this.notify();
+          // this.getEvents();
       })
       .catch(err => {
       console.log(err)
@@ -249,8 +250,8 @@ return (
             </h4>
        </div>
        </div>
-           <div class="row" id="zip">  
-      <div class="col s12 m12 l12 search center-align" >
+           <div className="row" id="zip">  
+      <div className="col s12 m12 l12 search center-align" >
           {/* <div class="input-field col s6"> */}
             {/* <input placeholder="Type your zip code" id="where" type="text" class="validate" />
             <label for="zip_code"></label> */}
@@ -293,7 +294,7 @@ return (
       return ( 
      
     <div className="col s12 m6 l3" id="column">  
-  <div class="card medium" key={items.id} >
+  <div class="card" key={items.id} >
   <div class="card-image waves-effect waves-block waves-light">
   
   {items.image ? <img class="activator" src={items.image} alt="hello"/> : <div id="img-div"/>}

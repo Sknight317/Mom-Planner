@@ -44,36 +44,32 @@ componentDidMount() {
     this.loadTodos();
     this.loadEvents();
     var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems);
-  
+    var instances = M.FormSelect.init(elems);  
 }
 
 showModal = () => {
-    this.setState({ show: true });
-    
+    this.setState({ show: true });    
 };
 
 hideModal = () => {
     this.setState({ show: false });
-    // const box = document.getElementById("user-message");
-    // box.Text = ""
+    // // document.getElementById('pick').value();
+    // document.getElementById('user-message').reset();
 };
 
 addNewNote = event => {
 event.preventDefault()
 // alert("add button clicked");
-// this.getRandomColor()
 if(this.state.selectValue && this.state.todotext) {
-  // const { user } = this.props.auth;
  API.saveTodo({
     name: this.state.selectValue,
     todoText: this.state.todotext,
-    // Userid: this.user
   })
-    .then(res => console.log(res), this.loadTodos(), this.notify(), this.clear())
+    .then(res => console.log(res), this.loadTodos(), this.notify())
     .catch(err => console.log(err));
     this.hideModal();
     this.setState({appendedGrocery: true})
+   
 }
 // const e = document.getElementById("pick");
 // const Modname = e.options[e.selectedIndex].value;
@@ -100,23 +96,16 @@ if(this.state.selectValue && this.state.todotext) {
 // } if (this.state.Modname === 3) {
 //   this.addtoTodo()
 // }
-
 }
 
-  getColors = () => {
-  let colorValues = ['#F988B7', '#76D7D6', '#ABE3E5', '#F6E7A3','#F8C5DO'];
-  var notes = document.querySelectorAll(".box");
+  // getColors = () => {
+  // let colorValues = ['#F988B7', '#76D7D6', '#ABE3E5', '#F6E7A3','#F8C5DO'];
+  // var notes = document.querySelectorAll(".box");
 
-  for(let i=0; i < notes.length; i++){
-    notes[i].style.backgroundColor = colorValues[Math.floor(Math.random() * colorValues.length)];
-  }  
-  }
- 
- 
-clear =()=> {
-  document.getElementById('pick').value = "";
-  document.getElementById('user-message').value = ""
-} 
+  // for(let i=0; i < notes.length; i++){
+  //   notes[i].style.backgroundColor = colorValues[Math.floor(Math.random() * colorValues.length)];
+  // }  
+  // }
 
 handleChange = (e)=>{
   this.setState({ selectValue:e.target.value});
@@ -148,6 +137,13 @@ deleteTodo = id => {
     .catch(err => console.log(err));
 };
 
+deleteEvent = id => {
+  API.deleteEvent(id)
+    .then(res => this.loadEvents(),
+    this.notify3())
+    .catch(err => console.log(err));
+};
+
 editTodo = id => {
   this.setState({show: true})
   API.getTodo(id)({
@@ -164,20 +160,6 @@ updateTodo = id => {
   }).then(res => this.loadTodos())
   .catch(err => console.log(err));
 }
-// addtoAppointments =() => {
-//   console.log("added to appointments!!");
-//   this.hideModal();
-//   this.setState({appendedAppointment: true});
-//   API.saveTodo({
-//     title: this.state.title,
-//     // todoText: this.state.text
-//   })
-//   .catch(err => console.log(err));
-// }
-
-addtoTodo =()=>{
-  alert("added to To do!!")
-}
 
 handleInputChange = event => {
   const { name, value } = event.target;
@@ -185,30 +167,12 @@ handleInputChange = event => {
     [name]: value
   });
 };
-getBackground(i) {
-  const props = {
-    key: i,
-    background: `background ${this.getRandomColor()}`,
-  }
-  return (<Note {...props} />)
-}
-// handleTextChange = (id)=> {
-//   var data = {
-//     todoText: this.state.text,
-//     selectValue: this.state.selectValue
-//   };
-//   API.saveTodo(data,id)({
-//     name: this.state.selectValue,
-//     todoText: this.state.text,
-//   }).then(res => this.loadTodos())
-//   .catch(err => console.log(err));
-// }
 
-getcolor = ()=> {
-      let colorValues = ['#F988B7', '#76D7D6', '#ABE3E5', '#F6E7A3','#F8C5DO'];
-      let newcolor = colorValues[Math.floor(Math.random() * colorValues.length)];
-      return newcolor
-    }
+// getcolor = ()=> {
+//       let colorValues = ['#F988B7', '#76D7D6', '#ABE3E5', '#F6E7A3','#F8C5DO'];
+//       let newcolor = colorValues[Math.floor(Math.random() * colorValues.length)];
+//       return newcolor
+//     }
 
     notify = () => {
       toast("Success: Note Added!", {
@@ -244,13 +208,26 @@ getcolor = ()=> {
       })
       })
     }
+
+    notify3 = () => {
+      toast("Success: Event Deleted!", {
+      position: "top-center",
+      autoClose: 5000,
+      closeOnClick: true,
+      draggable: true,
+      className: css({
+        background: 'green'
+      }),
+      bodyClassName: css({
+        fontSize: '20px'
+      }),
+      progressClassName: css({
+        background: "repeating-radial-gradient(circle at center, white, green 30px)"
+      })
+      })
+    }
 render() {
     const show = this.state.show;
-    if (show) {
-      
-    }
-    // const appendedGrocery = this.state.appendedGrocery;
-    // const appendedAppointment = this.state.appendedAppointment;
     const { user } = this.props.auth;
     const message='You selected '+this.state.selectValue + '.';
     const number  = this.state.grocerynotes.length;
@@ -258,7 +235,6 @@ render() {
   
 return (
   
- 
   <div className="container l12" id="background">  
   <Navbar/>
       <ToastContainer/>
@@ -287,11 +263,11 @@ return (
       
       <Modal className="modal" show={this.state.show} handleClose={this.hideModal}>
       {/* <div class="input-field col s12"> */}
-      
-    <select id="pick" value={this.state.selectValue} onChange={this.handleInputChange} name="selectValue"
+      <form>
+    <select type='reset' id="pick" value={this.state.selectValue} onChange={this.handleInputChange} name="selectValue"
     >
      
-      <option value="" disabled selected>Choose your option</option>
+      <option value="" disabled selected>Choose a note type</option>
       <option value="Groceries">Groceries</option>
       <option value="To Do">To Do</option>
       <option value="Appointments">Appointments</option>
@@ -300,7 +276,7 @@ return (
   
     {/* <div> */}
           <label data-error="wrong" data-success="right" for="form8">Your Note</label>
-          <textarea value={this.state.todotext} name="todotext" onChange={this.handleInputChange}  rows="4" id="user-message"class="form-control" placeholder="Enter your Message"></textarea>
+          <textarea type='reset' value={this.state.todotext} name="todotext" onChange={this.handleInputChange}  rows="4" id="user-message"class="form-control" placeholder="Enter your Message"></textarea>
           
     {/* </div> */}
     <AddNewNote className="waves-effect waves-light btn" 
@@ -308,6 +284,7 @@ return (
     </AddNewNote >
     {/* <label>Materialize Select</label> */}
   {/* </div> */}
+  </form>
       </Modal>
       <div className="row">
       
@@ -338,7 +315,7 @@ return (
       //     <ListItem>
         <Note key={note._id}
         className="box"
-        style={this.getcolor()}>
+        >
         
         <p className="text-title">{note.name }</p>
         <p className="text">{note.todoText}</p>
@@ -380,9 +357,9 @@ return (
           //  const niceDate =moment(newday).format("dddd, MMM Do");
            return (
             <div className="col s12 m6 l3" id="column">  
-            <div class="card medium" key={items.id} >
+            <div class="card" key={items._id} >
             <div class="card-image waves-effect waves-block waves-light">
-            {items.imageUrl ? <img class="activator" id="image" src={items.imageUrl} alt="hello"/> : <div id="alternate"/>}
+            {items.imageUrl ? <img class="activator" id="image" src={items.imageUrl} alt="hello"/> : <div id="img-div2"/>}
                {/* <Thumbnail src={thumbnail} /> */}
             </div>
             <div class="card-content">
@@ -394,7 +371,9 @@ return (
                     {/* <button onClick={() => this.add(items.id)}/> */}
                     {/* <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={this.add}><i class="material-icons">add</i></a> */}
               <p><a rel="noreferrer noopener" target="_blank" href={items.url} style={{textDecoration:'underline', color: '#413639'}}>Read more.</a></p>
-             
+              <div id="delete">
+              <DeleteBtn style={{margin: '0 auto'}} onClick={() => this.deleteEvent(items._id)} />
+              </div>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
@@ -408,13 +387,11 @@ return (
              </div>
                
                 ) : (
-                 <h3 className="notes"> No Events to Display. </h3>
+                 <h3 className="notes"> No Events Yet. </h3>
                )}
     
   </div>
-  
-  
-       
+     
         </div>
         
     );
