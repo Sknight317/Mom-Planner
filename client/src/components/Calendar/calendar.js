@@ -70,7 +70,7 @@ if(this.state.selectValue && this.state.todotext) {
     todoText: this.state.todotext,
     // Userid: this.user
   })
-    .then(res => console.log(res), this.loadTodos(), this.notify())
+    .then(res => console.log(res), this.loadTodos(), this.notify(), this.clear())
     .catch(err => console.log(err));
     this.hideModal();
     this.setState({appendedGrocery: true})
@@ -113,7 +113,10 @@ if(this.state.selectValue && this.state.todotext) {
   }
  
  
- 
+clear =()=> {
+  document.getElementById('pick').value = "";
+  document.getElementById('user-message').value = ""
+} 
 
 handleChange = (e)=>{
   this.setState({ selectValue:e.target.value});
@@ -251,6 +254,7 @@ render() {
     const { user } = this.props.auth;
     const message='You selected '+this.state.selectValue + '.';
     const number  = this.state.grocerynotes.length;
+    const number2 = this.state.events.length;
   
 return (
   
@@ -265,7 +269,7 @@ return (
           <h4 className="heading2">
               <p id="name-calendar" className="white2"><b>Hey, {user.name.split(" ")[0]} !</b></p>
               <p className="white2">
-                Stay organized and plan out your week! Click the add a new note button to get started. You have <b> {number} </b> notes!
+                Stay organized and plan out your week! Click the add a new note button to get started. You have <b> {number} </b> notes and <b>{number2}</b> events!
               </p>
             </h4>
             <LogoutBtn
@@ -378,7 +382,7 @@ return (
             <div className="col s12 m6 l3" id="column">  
             <div class="card medium" key={items.id} >
             <div class="card-image waves-effect waves-block waves-light">
-            {items.image ? <img class="activator" src={items.imageUrl} alt="hello"/> : ""}
+            {items.imageUrl ? <img class="activator" id="image" src={items.imageUrl} alt="hello"/> : <div id="alternate"/>}
                {/* <Thumbnail src={thumbnail} /> */}
             </div>
             <div class="card-content">

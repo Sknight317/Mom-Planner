@@ -295,8 +295,9 @@ return (
     <div className="col s12 m6 l3" id="column">  
   <div class="card medium" key={items.id} >
   <div class="card-image waves-effect waves-block waves-light">
-  {items.image ? <img class="activator" src={items.image} alt="hello"/> : ""}
-    
+  
+  {items.image ? <img class="activator" src={items.image} alt="hello"/> : <div id="img-div"/>}
+  
   
      {/* <Thumbnail src={thumbnail} /> */}
   </div>
@@ -306,9 +307,11 @@ return (
           <p className="item">{items.address}</p>
           <p className="item">{location}</p>
           {/* <p>{niceDate}</p> */}
+          <div id="save-btn">
           <Logoutbtn style={{size:"small"}} id="save-button" onClick={() => this.add(items.id)}>
           Save
           </Logoutbtn>
+          </div>
           {/* <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={this.add}><i class="material-icons">add</i></a> */}
     <p><a rel="noreferrer noopener" target="_blank" href={items.url} style={{color: '#413639', textDecoration: 'underline'}}>Read more.</a></p>
    

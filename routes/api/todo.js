@@ -12,11 +12,11 @@ require('../../config/passport')(passport)
 //   .post(ToDoController.create);
 
 // // Matches with "/api/todo/:id"
-// router
-//   .route("/:id")
-//   .get(ToDoController.findById)
+router
+  .route("/:id")
+  .get(ToDoController.findById)
 //   .put(ToDoController.update)
-//   .delete(ToDoController.remove);
+  .delete(ToDoController.remove);
 
 // module.exports = router;
 
