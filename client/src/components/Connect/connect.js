@@ -119,7 +119,7 @@ checkZip=(where) => {
     return this.notify3()
   } else {
     console.log(where)
-    axios.get(proxyurl + "http://api.eventful.com/json/events/search?app_key=8fh9T8QtjLVjwLvP&where=" + where + "&page_size=25")
+    axios.get(proxyurl + "https://api.eventful.com/json/events/search?app_key=8fh9T8QtjLVjwLvP&where=" + where + "&page_size=25")
         .then(result=> {
             console.log(result)
             let items = [];
