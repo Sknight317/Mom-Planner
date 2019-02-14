@@ -43,7 +43,7 @@ router.get(
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+  (req, res, next) => {
     let token = getToken(req.headers);
     console.log(token)
   if (token) {

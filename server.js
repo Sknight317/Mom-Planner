@@ -4,7 +4,6 @@ const passport = require("passport");
 const todo = require("./routes/api/todo");
 const users = require("./routes/api/users");
 const events = require("./routes/api/save-event");
-const fetch = require('node-fetch');
 require('dotenv').config();
 // mongoose.plugin(schema => { schema.options.usePushEach = true });
 // const routes = require("./routes");
