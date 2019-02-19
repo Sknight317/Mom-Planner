@@ -154,11 +154,11 @@ class MenuAppBar extends React.Component {
             </ListItem>
             <ListItem button component={Link} to="/calendar" >
             <ListItemIcon> <NoteIcon /> </ListItemIcon> 
-              <ListItemText primary="Notes" />
+              <ListItemText primary="My Board" />
             </ListItem>
             <ListItem button component={Link} to="/connect" >
             <ListItemIcon> <EventIcon /> </ListItemIcon> 
-              <ListItemText primary="Events" />
+              <ListItemText primary="Search Events" />
             </ListItem>
           
           
