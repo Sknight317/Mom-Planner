@@ -29,7 +29,7 @@
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "dotenv": "^6.2.0",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "glamor": "^2.20.40",
     "is-empty": "^1.2.0",
     "jquery": "^3.3.1",
